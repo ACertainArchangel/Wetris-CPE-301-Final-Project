@@ -1600,7 +1600,7 @@ uint16_t stress_scaler;
 void update(bool player_dry, uint16_t stress_level) {
 
     if(player_dry){
-        stress_scaler = 0.5 + stress_level/255;
+        stress_scaler = 0.5 + (stress_level+1)/256;
         if(ch0index-1==-1){
             index0 = ch0size - 1;
         }

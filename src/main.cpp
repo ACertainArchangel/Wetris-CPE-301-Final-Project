@@ -10,7 +10,7 @@
 #define SAFETY_THRESHOLD 10
 #define MUSIC_SPEED 1.0
 
-uint16_t stress_level;
+uint8_t stress_level;
 
 struct flags{
     byte game_over : 1;
