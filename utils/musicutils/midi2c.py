@@ -94,7 +94,7 @@ int noteDurations_ch{ch}[] = {{
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python midi_to_arduino.py <midi_file> <track_index>")
+        print("Usage: python3 midi2c.py <midi_file> <track_index>")
         sys.exit(1)
 
     midi_file = sys.argv[1]
