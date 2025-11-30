@@ -1624,10 +1624,10 @@ void update(bool player_dry, uint16_t stress_level) {
             ch0advance();
         }
         if(millis()-last_ch1update_millis>=noteDurations_ch1[index1]/stress_scaler){
-            ch0advance();
+            ch1advance();
         }
         if(millis()-last_ch2update_millis>=noteDurations_ch2[index2]/stress_scaler){
-            ch0advance();
+            ch2advance();
         }
     }
     else{
