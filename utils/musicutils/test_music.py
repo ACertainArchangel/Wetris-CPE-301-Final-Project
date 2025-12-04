@@ -100,7 +100,7 @@ def play_waveform(waveform):
     sa.play_buffer(audio, 1, 2, SAMPLE_RATE).wait_done()
 
 def main():
-    track_files = ["track1.txt", "track2.txt", "track3.txt"]
+    track_files = ["sad1.txt", "sad2.txt", "sad3.txt"]#["track1.txt", "track2.txt", "track3.txt"]
     track_waves = []
 
     for tf in track_files:

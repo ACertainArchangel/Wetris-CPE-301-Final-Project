@@ -5,7 +5,7 @@ namespace ReadPotentiometer{
         
     }
 
-    uint16_t read(){
-        
+    uint8_t read(){
+        return 127;
     }
 }

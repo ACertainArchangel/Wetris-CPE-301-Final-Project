@@ -10,8 +10,8 @@ volatile int currentCount = 0; // mS counter for timer/tick
 // Each tetronimo will have a designated origin block to track on the board and for rotation
 int originX = 0;
 int originY = 0;
-long currentPiece = 1; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z
-long nextPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z, to be spawned flat side facing down
+int currentPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z
+int nextPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z, to be spawned flat side facing down
 int score = 0;
 
 // Position Trackers
@@ -19,6 +19,8 @@ int offSetRow = 0;
 int offSetCol = 0;
 int rotationState = 1;
 bool piecePlaced = false;
+
+Position currentrotation[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)}; // Used for ease of tracking using copyArray() and rotationCopy()
 
 Position currentrotation[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)}; // Used for ease of tracking using copyArray() and rotationCopy()
 
@@ -379,7 +381,7 @@ void initBoard() {
   }
   score = 0;
 }
-
+///TODO: fix for actual current and next piece lmao
 void initPiece() {
   originX = 0;
   originY = 0;

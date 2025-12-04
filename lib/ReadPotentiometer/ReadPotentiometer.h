@@ -3,5 +3,5 @@
 
 namespace ReadPotentiometer{
     void setup();
-    uint16_t read();
+    uint8_t read();
 }

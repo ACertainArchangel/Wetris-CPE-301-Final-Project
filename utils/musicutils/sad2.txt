@@ -1,0 +1,12 @@
+int ch1sadnotes[] = {
+    NOTE_F3,
+    NOTE_E3,
+    NOTE_DS3,
+    NOTE_D3,
+};
+int ch1sad_durations[] = {
+    500,
+    500,
+    500,
+    1000,
+};

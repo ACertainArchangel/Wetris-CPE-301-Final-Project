@@ -1,0 +1,12 @@
+int ch2sadnotes[] = {
+    NOTE_AS2,
+    NOTE_A2,
+    NOTE_GS2,
+    NOTE_G2,
+};
+int ch2sad_durations[] = {
+    500,
+    500,
+    500,
+    1000,
+};

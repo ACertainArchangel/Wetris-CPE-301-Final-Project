@@ -10,7 +10,7 @@
 #define SAFETY_THRESHOLD 10
 #define MUSIC_SPEED 1.0
 
-uint16_t stress_level;
+uint8_t stress_level;
 
 struct flags{
     byte game_over : 1;
@@ -19,10 +19,16 @@ struct flags{
 };
 
 void setup() {
+    init();
+    sei();
     UBRR0 = 103; //9600 baud rate
+    Serial.begin(9600);
+    Serial.println("Setup starting...");
     LcdTetris::setup();
     MusicPlayer::setup();
+    Serial.println("Music initialized - channels on pins 11, 10, 6");
     WaterGun::setup();
+    Serial.println("Setup complete!");
 }
 
 void loop() {
