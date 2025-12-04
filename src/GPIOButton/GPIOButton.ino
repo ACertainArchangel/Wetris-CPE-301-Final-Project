@@ -1,6 +1,6 @@
-int button1Pin = 10;
-int button2Pin = 9;
-int button3Pin = 8;
+int button1Pin = 6;
+int button2Pin = 5;
+int button3Pin = 4;
 
 int button1Val;
 int button2Val;
@@ -23,6 +23,10 @@ void setup() {
 
 void loop() {
   //debounce();
+  processInput();
+}
+
+void processInput() {
   button1Val = digitalRead(button1Pin);
   button2Val = digitalRead(button2Pin);
   button3Val = digitalRead(button3Pin);

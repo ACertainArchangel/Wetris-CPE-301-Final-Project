@@ -1,23 +1,24 @@
 #include <Position.h>
 #include <string.h>
-/// TODO: Cleanup methods and positioning rework all loops to account to block ID's
+#include <LCDWIKI_GUI.h> //Core graphics library
+#include <LCDWIKI_SPI.h> //Hardware-specific library
 /// Global Vars
 int gameBoard[25][10]; // standard 20x10 tetris board, extra 5 for holding pieces above board
-int BoundingBoxLarge[4][4]; // larger bounding box for line piece
-int boundingBoxSmall[3][3];// smaller bounding box for other pieces
 int tickRate = 3; // will be converted to mS later
+unsigned long timeSinceTick = 0;
 volatile int currentCount = 0; // mS counter for timer/tick
 // Each tetronimo will have a designated origin block to track on the board and for rotation
 int originX = 0;
 int originY = 0;
-int currentPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z
-int nextPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z, to be spawned flat side facing down
+long currentPiece = 1; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z
+long nextPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z, to be spawned flat side facing down
 int score = 0;
 
 // Position Trackers
 int offSetRow = 0;
 int offSetCol = 0;
 int rotationState = 1;
+bool piecePlaced = false;
 
 Position currentrotation[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)}; // Used for ease of tracking using copyArray() and rotationCopy()
 
@@ -64,49 +65,76 @@ Position stateZ4[4] = {Position(0,1), Position(1,0), Position(1,1), Position(2,0
 
 /// For now using lib functions for ease of use
 //Input setup for buttons
-unsigned long lastDebounceTimeLeft = 0;
-unsigned long lastDebounceTimeRight = 0;
-unsigned long lastDebounceTimeRotate = 0;
-unsigned long debounceDelay = 50;
-int lastButtonStateLeft = LOW;
-int lastButtonStateRight = LOW;
-int lastButtonStateRotate = LOW;
+const int button1Pin = 6;
+const int button2Pin = 5;
+const int button3Pin = 4;
+int button1Val;
+int button2Val;
+int button3Val;
 
-const int buttonPinLeft;
-const int buttonPinRight;
-const int buttonPinRotate;
-int buttonStateLeft;
-int buttonStateRight;
-int buttonStateRotate;
-// unsigned char* ddr_b = (unsigned char*) 0x24;
-// unsigned char* port_b = (unsigned char*) 0x25;
-// unsigned char* pin_b = (unsigned char*) 0x23;
-// unsigned char* ddr_h = (unsigned char*) 0x101;
-// unsigned char* port_h = (unsigned char*) 0x102;
+int button1LastVal = LOW;
+int button2LastVal = LOW;
+int button3LastVal = LOW;
 
+//paramters define
+#define MODEL ST7796S
+#define CS   10    
+#define CD   9
+#define RST  8
+#define LED  7   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
+
+LCDWIKI_SPI mylcd(MODEL,CS,CD,RST,LED); //model,cs,dc,reset,led
+//define some colour values
+#define  BLACK   0x0000
+#define BLUE    0x001F
+#define RED     0xF800
+#define GREEN   0x07E0
+#define CYAN    0x07FF
+#define MAGENTA 0xF81F
+#define YELLOW  0xFFE0
+
+// render area of board
+int width = mylcd.Get_Display_Width();
+int height = mylcd.Get_Display_Height();
 
 void setup() {
   Serial.begin(9600);
+  pinMode(button1Pin, INPUT_PULLUP);
+  pinMode(button2Pin, INPUT_PULLUP);
+  pinMode(button3Pin, INPUT_PULLUP);
+  randomSeed(analogRead(0));
   initBoard();
   initPiece();
-  registerSetUp();
-  ///TODO: find a way to force this to happen I guess maybe with button input
-  //attachInterrupt(digitalPinToInterrupt(2), ISR, CHANGE);
+  mylcd.Init_LCD();
+  clearScreen();
 }
 
 void loop() {
   ///TODO: remove delay as not allowed in final : (
-  delay(3000); // small 3s delay for game start 
   // Game loop
   while (!fail) {
-    
     // Make new piece
-    initPiece();
-    debounce();
+    if (piecePlaced) {
+      initPiece();
+      piecePlaced = false;
+    }
     processInputs();
-    placePiece(); /// TODO: add logic checks for bounds
+    rotationCopy();
+    // commented out for now to work out later
+    // if ((millis() - timeSinceTick) > (tickRate * 1000)) {
+    //   int lastRow = offSetRow;
+    //   movePiece(1,0);
+    //   if (offSetRow == lastRow) {
+    //     placePiece();
+    //   }
+    // }
+    delay(200);
+    movePiece(1,0);
     checkTetris();
     fail = checkFail();
+    timeSinceTick = millis();
+    clearScreen();
+    renderBoard();
   }
   // Reset Game
   initPiece();
@@ -116,7 +144,6 @@ void loop() {
 void copyArray(Position* source, Position* destination, int len) {
   memcpy(destination, source, sizeof(source[0])*len);
 }
-
 
 void rotationCopy() {
   int length = 4;
@@ -211,8 +238,6 @@ void rotationCopy() {
   }
 }
 
-
-
 bool isCellEmpty(int row, int col) {
   if (gameBoard[row][col] != 0) {
     return false;
@@ -239,29 +264,34 @@ bool isRowFull(int row) {
 }
 
 bool pieceFits() {
-  Position rotationState[4] = {Position(0,0), Position(0,1), Position(1,1), Position(1,2)};
+  rotationCopy();
   for(int x = 0; x < 4; x++) {
-    if (gameBoard[rotationState[x].getRow() + offSetRow][rotationState[x].getCol() + offSetCol] != 0) {
+    if (gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] != 0) {
       return false;
+      Serial.println("Doesnt Fit!");
     }
   }
   return true;
 }
-
-void myInterrupt() {
-  movePiece(1, 0);
-}
-
 void processInputs() {
-  if (buttonStateLeft == HIGH) {
+  button1Val = digitalRead(button1Pin);
+  button2Val = digitalRead(button2Pin);
+  button3Val = digitalRead(button3Pin);
+  if (button1Val == HIGH) {
     movePiece(0, -1);
+    Serial.println("B1 pressed");
   }
-  if (buttonStateRight == HIGH) {
+  if (button2Val == HIGH) {
     movePiece(0, 1);
+    Serial.println("B2 pressed");
   }
-  if (buttonStateRotate == HIGH) {
+  if (button3Val == HIGH) {
     rotatePieceCW();
+    Serial.println("B3 pressed");
   }
+  button1LastVal = button1Val;
+  button2LastVal = button2Val;
+  button3LastVal = button3Val;
 }
 
 /// Board Actions
@@ -271,6 +301,7 @@ void placePiece() {
   for (int x = 0; x < 4; x++) {
     gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] = currentPiece;
   }
+  piecePlaced = true;
 }
 
 void clearRow(int row) {
@@ -289,7 +320,6 @@ void checkTetris() {
 }
 
 bool checkFail() {
-  int sum = 0;
   if(!isRowEmpty(2) && !isRowEmpty(3)) {
     return true;
   }
@@ -305,6 +335,11 @@ void rotatePieceCW() {
   else {
     rotationState = 1;
   }
+
+  if (!pieceFits()) {
+    rotatePieceCCW();
+  }
+  rotationCopy();
 }
 
 void rotatePieceCCW() {
@@ -314,17 +349,26 @@ void rotatePieceCCW() {
   else {
     rotationState = 4;
   }
+
+  if (!pieceFits()) {
+    rotatePieceCW();
+  }
 }
 
 void movePiece(int row, int col) {
-  /// TODO: Double check Bounds check here
-  // pptentially need to fix and move this
-  if (gameBoard[offSetRow + row][offSetCol] == 0) {
+  if (offSetRow + row <= 25 && offSetRow + row >= 0) {
     offSetRow += row;
   }
-  if (offSetCol + col <= 10) {
+  if (offSetCol + col <= 10 && offSetCol + col >= 0) {
     offSetCol += col;
   }
+  // if doesn't fit revert the action just made
+  if (!pieceFits()) {
+    movePiece(row * -1, col * -1);
+  }
+
+  //Serial.println(offSetRow);
+  //Serial.println(offSetCol);
 }
 /// System
 void initBoard() {
@@ -335,7 +379,7 @@ void initBoard() {
   }
   score = 0;
 }
-///TODO: fix for actual current and next piece lmao
+
 void initPiece() {
   originX = 0;
   originY = 0;
@@ -352,49 +396,87 @@ void initPiece() {
   offSetRow = 3;
   offSetCol = 5;
   rotationCopy();
+  //Serial.println(currentPiece);
 }
 
-///TODO: modify for new input
-void registerSetUp() {
-  // *ddr_h |= 0x10; // Green
-  // *ddr_h |= 0x20; // Yellow
-  // *ddr_h |= 0x40; // Red
-  // *ddr_b |= 0xEF; // Button (INPUT)
-  // *port_b |= 0x10; // enbale resistor  
+/// Rendering Methods
+void clearScreen() {
+  mylcd.Fill_Screen(BLACK);
 }
 
-void debounce() {
-  buttonStateLeft = digitalRead(buttonPinLeft);
-  buttonStateRight = digitalRead(buttonPinRight);
-  buttonStateRotate = digitalRead(buttonPinRotate);
-
-  if (buttonStateLeft != lastButtonStateLeft) {
-    lastDebounceTimeLeft = millis();
-    lastButtonStateLeft = buttonStateLeft;
-  }
-  if (buttonStateRight != lastButtonStateRight) {
-    lastDebounceTimeRight = millis();
-    lastButtonStateRight = buttonStateRight;
-  }
-  if (buttonStateRotate != lastButtonStateRotate) {
-    lastDebounceTimeRotate = millis();
-    lastButtonStateRotate = buttonStateRotate;
-  }
-  /// TODO: finish
-  if ((millis() - lastDebounceTimeLeft) > debounceDelay) {
-    if (lastButtonStateLeft != buttonStateLeft) {
-      
+void renderBoard() {
+  int x1 = 0;
+  int y1 = 0;
+  int size = 19;
+  // draw rects
+  for (int x = 0; x < 25; x++) {
+    for (int y = 0; y < 10; y++) {
+      if (gameBoard[x][y] >= 1) {
+        mylcd.Draw_Rectangle(x1, y1, x1 + size, y1 + size);
+      }
+      x1 = x1 + size;
     }
+    y1 = y1 + size;
+    x1 = 0;
+  }
+  x1 = 0;
+  y1 = 0;
+  // fill rects
+  mylcd.Set_Draw_color(random(255), random(255), random(255));
+  for (int x = 0; x < 25; x++) {
+    for (int y = 0; y < 10; y++) {
+      if (gameBoard[x][y] >= 1) {
+        mylcd.Fill_Rectangle(x1, y1, x1 + size, y1 + size);
+      }
+      x1 = x1 + size;
+    }
+    y1 = y1 + size;
+    x1 = 0;
+  }
+  x1 = 0;
+  y1 = 0;
+
+  
+  // render peice in play, assumes rotation was copied at some point into piece
+  int startingX = 0;
+  int startingY = 0;
+  int endX = 0;
+  int endY = 0;
+  for (int x = 0; x < 4; x++) {
+    if (currentrotation[x].getRow() == 0 && offSetRow == 0) {
+      startingY =  0;
+      endY = 19;
+    }
+    else {
+      startingY = (currentrotation[x].getRow() + offSetRow) * size;
+      endY = (currentrotation[x].getRow() + offSetRow + 1) * size;
+    } // first block being overlapped with second?
+    if (currentrotation[x].getCol() == 0 && offSetCol == 0) {
+      startingX = 0;
+      endX = 19;
+    }
+    else {
+      startingX = (currentrotation[x].getCol() + offSetCol) * size;
+      endX = (currentrotation[x].getCol() + offSetCol + 1) * size; // this seemed to fix it for now
+    }
+    // Serial.print("offSetRow: ");
+    // Serial.println(offSetRow);
+    // Serial.print("offSetCol: ");
+    // Serial.println(offSetCol);
+    // Serial.print("Piece Row: ");
+    // Serial.println(currentrotation[x].getRow());
+    // Serial.print("Piece Col: ");
+    // Serial.println(currentrotation[x].getCol());
+
+    // Serial.print("starting X: ");
+    // Serial.println(startingX);
+    // Serial.print("starting Y: ");
+    // Serial.println(startingY);
+    // Serial.print("endX: ");
+    // Serial.println(endX);
+    // Serial.print("endY: ");
+    // Serial.println(endY);
+    mylcd.Draw_Rectangle(startingX, startingY, endX, endY);
+    //mylcd.Draw_Rectangle(0, 0, 19, 19);
   }
 }
-
-
-
-
-
-
-
-
-
-
-

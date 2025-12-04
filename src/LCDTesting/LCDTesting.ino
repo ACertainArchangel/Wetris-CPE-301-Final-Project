@@ -10,7 +10,7 @@ int gameBoard[25][10];
 #define CS   10    
 #define CD   9
 #define RST  8
-#define LED  5   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
+#define LED  7   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
 
 //the definiens of hardware spi mode as follow:
 //if the IC model is known or the modules is unreadable,you can use this constructed function
