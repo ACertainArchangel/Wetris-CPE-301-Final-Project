@@ -21,16 +21,18 @@ int rotationState = 1;
 bool piecePlaced = false;
 
 Position currentrotation[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)}; // Used for ease of tracking using copyArray() and rotationCopy()
-
-Position currentrotation[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)}; // Used for ease of tracking using copyArray() and rotationCopy()
+// Since clearing the screen is slow this is used to clear the old piece by simply drawing over it
+Position previousRender[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
+int previousOffSet[2] = {0,0}; // offSetX, offSetY
 
 bool fail = false;
 /// Rotation States for each piece
+/// TODO: add starting offset
 /// line piece states (states 1-4)
 Position stateLine1[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
-Position stateLine2[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
-Position stateLine3[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
-Position stateLine4[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
+Position stateLine2[4] = {Position(0,2), Position(1,2), Position(2,2), Position(3,2)};
+Position stateLine3[4] = {Position(2,0), Position(2,1), Position(2,2), Position(2,3)};
+Position stateLine4[4] = {Position(0,1), Position(1,1), Position(2,1), Position(3,1)};
 
 /// J-Piece states (states 5-8)
 Position stateJ1[4] = {Position(0,0), Position(1,0), Position(1,1), Position(1,2)};
@@ -94,6 +96,7 @@ LCDWIKI_SPI mylcd(MODEL,CS,CD,RST,LED); //model,cs,dc,reset,led
 #define CYAN    0x07FF
 #define MAGENTA 0xF81F
 #define YELLOW  0xFFE0
+#define ORANGE  0xFB20
 
 // render area of board
 int width = mylcd.Get_Display_Width();
@@ -131,16 +134,18 @@ void loop() {
     //   }
     // }
     delay(200);
-    movePiece(1,0);
-    checkTetris();
+    movePieceDown();
     fail = checkFail();
     timeSinceTick = millis();
-    clearScreen();
-    renderBoard();
+    renderPiece();
+    renderMisc();
   }
   // Reset Game
-  initPiece();
   initBoard();
+  initPiece();
+  clearScreen();
+  renderBoard();
+  fail = false;
 }
 /// Helper methods
 void copyArray(Position* source, Position* destination, int len) {
@@ -264,13 +269,13 @@ bool isRowFull(int row) {
   }
   return true;
 }
-
+/// TODO: broke
 bool pieceFits() {
   rotationCopy();
   for(int x = 0; x < 4; x++) {
-    if (gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] != 0) {
-      return false;
+    if ((gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] != 0) || (currentrotation[x].getRow() + offSetRow > 24) || (currentrotation[x].getCol() + offSetCol  > 9) || (currentrotation[x].getRow() + offSetRow < 0) || (currentrotation[x].getCol() + offSetCol  < 0)) {
       Serial.println("Doesnt Fit!");
+      return false;
     }
   }
   return true;
@@ -280,11 +285,11 @@ void processInputs() {
   button2Val = digitalRead(button2Pin);
   button3Val = digitalRead(button3Pin);
   if (button1Val == HIGH) {
-    movePiece(0, -1);
+    moveLeft();
     Serial.println("B1 pressed");
   }
   if (button2Val == HIGH) {
-    movePiece(0, 1);
+    moveRight();
     Serial.println("B2 pressed");
   }
   if (button3Val == HIGH) {
@@ -304,6 +309,8 @@ void placePiece() {
     gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] = currentPiece;
   }
   piecePlaced = true;
+  checkTetris();
+  renderBoard();
 }
 
 void clearRow(int row) {
@@ -312,17 +319,36 @@ void clearRow(int row) {
   }
 }
 
-void checkTetris() {
-  for (int x = 0; x < 25; x++) {
-    if (isRowFull(x)) {
-      clearRow(x);
-      score++;
+void moveBoardDown() {
+  // starts at row 24 because those at the lowest row cant be moved down
+  for(int x = 23; x > 0; x--) {
+    for(int y = 0; y < 10; y++) {
+      if(gameBoard[x + 1][y] == 0) {
+        gameBoard[x + 1][y] = gameBoard[x][y];
+        gameBoard[x][y] = 0;
+      }
     }
   }
 }
 
+void checkTetris() {
+  bool rowCleared = false;
+  for (int x = 0; x < 25; x++) {
+    if (isRowFull(x)) {
+      clearRow(x);
+      score++;
+      rowCleared = true;
+    }
+  }
+  if (rowCleared) {
+    moveBoardDown();
+    clearScreen();
+  }
+  renderBoard();
+}
+
 bool checkFail() {
-  if(!isRowEmpty(2) && !isRowEmpty(3)) {
+  if(!isRowEmpty(3)) {
     return true;
   }
   return false;
@@ -337,11 +363,11 @@ void rotatePieceCW() {
   else {
     rotationState = 1;
   }
-
+  rotationCopy();
   if (!pieceFits()) {
     rotatePieceCCW();
   }
-  rotationCopy();
+  
 }
 
 void rotatePieceCCW() {
@@ -351,27 +377,48 @@ void rotatePieceCCW() {
   else {
     rotationState = 4;
   }
-
+  rotationCopy();
   if (!pieceFits()) {
     rotatePieceCW();
   }
 }
 
 void movePiece(int row, int col) {
-  if (offSetRow + row <= 25 && offSetRow + row >= 0) {
-    offSetRow += row;
-  }
-  if (offSetCol + col <= 10 && offSetCol + col >= 0) {
-    offSetCol += col;
-  }
-  // if doesn't fit revert the action just made
-  if (!pieceFits()) {
-    movePiece(row * -1, col * -1);
-  }
-
-  //Serial.println(offSetRow);
-  //Serial.println(offSetCol);
+  offSetRow += row;
+  offSetCol += col;
+  
 }
+
+void moveLeft() {
+  offSetCol--;
+  if (!pieceFits()) {
+    moveRight();
+  }
+  Serial.println("offSetCol: ");
+  Serial.println(offSetCol);
+}
+void moveRight() {
+  offSetCol++;
+  if (!pieceFits()) {
+    moveLeft();
+  }
+  Serial.println("offSetCol: ");
+  Serial.println(offSetCol);
+}
+
+void movePieceDown() {
+  movePiece(1, 0);
+  if(!pieceFits()) {
+    movePiece(-1,0);
+    placePiece();
+  }
+  if (offSetRow >= 23) {
+    placePiece();
+  }
+  Serial.println("offSetRow: ");
+  Serial.println(offSetRow);
+}
+
 /// System
 void initBoard() {
   for(int x = 0; x < 25; x++) {
@@ -406,6 +453,69 @@ void clearScreen() {
   mylcd.Fill_Screen(BLACK);
 }
 
+void setColor(int ID) {
+  switch (ID) {
+    case 1:
+      mylcd.Set_Draw_color(CYAN);
+      break;
+    case 2:
+      mylcd.Set_Draw_color(BLUE);
+      break;
+    case 3:
+      mylcd.Set_Draw_color(ORANGE);
+      break;
+    case 4:
+      mylcd.Set_Draw_color(YELLOW);
+      break;
+    case 5:
+      mylcd.Set_Draw_color(GREEN);
+      break;
+    case 6:
+      mylcd.Set_Draw_color(MAGENTA);
+      break;
+    case 7:
+      mylcd.Set_Draw_color(RED);
+      break;
+  }
+}
+
+// Render score, and next piece
+void renderMisc() {
+  mylcd.Set_Text_Mode(0);
+  // Score Render
+  mylcd.Set_Text_colour(CYAN);
+  mylcd.Set_Text_Size(2);
+  mylcd.Print_Number_Int(score, 200, 104, 0, ' ', 16);
+
+  // Next Piece text because I dont feel like rendering the next piece
+  mylcd.Set_Text_colour(BLUE);
+  mylcd.Set_Text_Size(2);
+  switch (currentPiece) {
+    case 1:
+      mylcd.Print_String("I Piece", 200, 120);
+      break;
+    case 2:
+      mylcd.Print_String("J Piece", 200, 120);
+      break;
+    case 3:
+      mylcd.Print_String("L Piece", 200, 120);
+      break;
+    case 4:
+      mylcd.Print_String("Block Piece", 200, 120);
+      break;
+    case 5:
+      mylcd.Print_String("S Piece", 200, 120);
+      break;
+    case 6:
+      mylcd.Print_String("T Piece", 200, 120);
+      break;
+    case 7:
+      mylcd.Print_String("Z Piece", 200, 120);
+      break;
+  }
+}
+
+// To only be called when placePiece() is called
 void renderBoard() {
   int x1 = 0;
   int y1 = 0;
@@ -414,6 +524,7 @@ void renderBoard() {
   for (int x = 0; x < 25; x++) {
     for (int y = 0; y < 10; y++) {
       if (gameBoard[x][y] >= 1) {
+        setColor(gameBoard[x][y]);
         mylcd.Draw_Rectangle(x1, y1, x1 + size, y1 + size);
       }
       x1 = x1 + size;
@@ -424,10 +535,10 @@ void renderBoard() {
   x1 = 0;
   y1 = 0;
   // fill rects
-  mylcd.Set_Draw_color(random(255), random(255), random(255));
   for (int x = 0; x < 25; x++) {
     for (int y = 0; y < 10; y++) {
       if (gameBoard[x][y] >= 1) {
+        setColor(gameBoard[x][y]);
         mylcd.Fill_Rectangle(x1, y1, x1 + size, y1 + size);
       }
       x1 = x1 + size;
@@ -437,13 +548,40 @@ void renderBoard() {
   }
   x1 = 0;
   y1 = 0;
+}
 
-  
-  // render peice in play, assumes rotation was copied at some point into piece
+void renderPiece() {
+  mylcd.Set_Draw_color(0, 0, 0);
+  // Draw over old piece
   int startingX = 0;
   int startingY = 0;
   int endX = 0;
   int endY = 0;
+  int size = 19;
+  for (int x = 0; x < 4; x++) {
+    if (previousRender[x].getRow() == 0 && previousOffSet[0] == 0) {
+      startingY =  0;
+      endY = 19;
+    }
+    else {
+      startingY = (previousRender[x].getRow() + previousOffSet[0]) * size;
+      endY = (previousRender[x].getRow() + previousOffSet[0] + 1) * size;
+    } // first block being overlapped with second?
+    if (previousRender[x].getCol() == 0 && previousOffSet[1] == 0) {
+      startingX = 0;
+      endX = 19;
+    }
+    else {
+      startingX = (previousRender[x].getCol() + previousOffSet[1]) * size;
+      endX = (previousRender[x].getCol() + previousOffSet[1] + 1) * size; // this seemed to fix it for now
+    }
+    mylcd.Draw_Rectangle(startingX, startingY, endX, endY);
+  }
+  // render peice in play, assumes rotation was copied at some point into piece
+  setColor(currentPiece);
+  copyArray(currentrotation, previousRender, 4);
+  previousOffSet[0] = offSetRow;
+  previousOffSet[1] = offSetCol;
   for (int x = 0; x < 4; x++) {
     if (currentrotation[x].getRow() == 0 && offSetRow == 0) {
       startingY =  0;
