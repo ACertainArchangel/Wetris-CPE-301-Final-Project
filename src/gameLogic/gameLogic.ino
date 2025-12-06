@@ -4,12 +4,9 @@
 #include <LCDWIKI_SPI.h> //Hardware-specific library
 /// Global Vars
 int gameBoard[25][10]; // standard 20x10 tetris board, extra 5 for holding pieces above board
-int tickRate = 3; // will be converted to mS later
+float tickRate = 0.1; // will be converted to mS later
 unsigned long timeSinceTick = 0;
 volatile int currentCount = 0; // mS counter for timer/tick
-// Each tetronimo will have a designated origin block to track on the board and for rotation
-int originX = 0;
-int originY = 0;
 int currentPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z
 int nextPiece = 0; // 1 = line, 2 = J, 3 = L, 4 = block, 5 = S, 6 = T, 7 = Z, to be spawned flat side facing down
 int score = 0;
@@ -27,7 +24,6 @@ int previousOffSet[2] = {0,0}; // offSetX, offSetY
 
 bool fail = false;
 /// Rotation States for each piece
-/// TODO: add starting offset
 /// line piece states (states 1-4)
 Position stateLine1[4] = {Position(1,0), Position(1,1), Position(1,2), Position(1,3)};
 Position stateLine2[4] = {Position(0,2), Position(1,2), Position(2,2), Position(3,2)};
@@ -69,8 +65,8 @@ Position stateZ4[4] = {Position(0,1), Position(1,0), Position(1,1), Position(2,0
 
 /// For now using lib functions for ease of use
 //Input setup for buttons
-const int button1Pin = 6;
-const int button2Pin = 5;
+const int button1Pin = 13;
+const int button2Pin = 12;
 const int button3Pin = 4;
 int button1Val;
 int button2Val;
@@ -126,20 +122,17 @@ void loop() {
     processInputs();
     rotationCopy();
     // commented out for now to work out later
-    // if ((millis() - timeSinceTick) > (tickRate * 1000)) {
-    //   int lastRow = offSetRow;
-    //   movePiece(1,0);
-    //   if (offSetRow == lastRow) {
-    //     placePiece();
-    //   }
-    // }
-    delay(200);
-    movePieceDown();
+    if ((millis() - timeSinceTick) >= (tickRate * 1000)) {
+      movePieceDown();
+      timeSinceTick = millis();
+    }
     fail = checkFail();
-    timeSinceTick = millis();
     renderPiece();
     renderMisc();
   }
+  // Game over screen
+  gameOver();
+
   // Reset Game
   initBoard();
   initPiece();
@@ -284,6 +277,9 @@ void processInputs() {
   button1Val = digitalRead(button1Pin);
   button2Val = digitalRead(button2Pin);
   button3Val = digitalRead(button3Pin);
+  // if (button1Val == HIGH && button2Val == HIGH && button1LastVal == HIGH && button2LastVal == HIGH) {
+  //   dropPiece();
+  // }
   if (button1Val == HIGH) {
     moveLeft();
     Serial.println("B1 pressed");
@@ -292,7 +288,7 @@ void processInputs() {
     moveRight();
     Serial.println("B2 pressed");
   }
-  if (button3Val == HIGH) {
+  if (button3Val == LOW && button3LastVal == HIGH) {
     rotatePieceCW();
     Serial.println("B3 pressed");
   }
@@ -304,7 +300,6 @@ void processInputs() {
 /// Board Actions
 void placePiece() {
   rotationCopy(); // changes the global var
-  // TODO: assign values to gameBoard
   for (int x = 0; x < 4; x++) {
     gameBoard[currentrotation[x].getRow() + offSetRow][currentrotation[x].getCol() + offSetCol] = currentPiece;
   }
@@ -317,6 +312,17 @@ void clearRow(int row) {
   for (int x = 0; x < 10; x++) {
     gameBoard[row][x] = 0;
   }
+}
+
+/// Scrapped for now in favor of potentiometer idea
+void dropPiece() {
+  offSetRow = 25;
+  while (!pieceFits()) {
+    Serial.println("stuck");
+    offSetRow--;
+  }
+  placePiece();
+  initPiece();
 }
 
 void moveBoardDown() {
@@ -344,6 +350,20 @@ void checkTetris() {
     moveBoardDown();
     clearScreen();
   }
+  // score check
+  // if (score >= 7) {
+  //   tickRate = 0.5;
+  // }
+  // else if (score >= 5) {
+  //   tickRate = 1;
+  // }
+  // else if (score >= 3) {
+  //   tickRate = 2;
+  // }
+  // else {
+  //   tickRate = 3;
+  // }
+
   renderBoard();
 }
 
@@ -430,8 +450,6 @@ void initBoard() {
 }
 ///TODO: fix for actual current and next piece lmao
 void initPiece() {
-  originX = 0;
-  originY = 0;
   offSetRow = 0;
   offSetCol = 0;
   rotationState = 1;
@@ -485,7 +503,8 @@ void renderMisc() {
   // Score Render
   mylcd.Set_Text_colour(CYAN);
   mylcd.Set_Text_Size(2);
-  mylcd.Print_Number_Int(score, 200, 104, 0, ' ', 16);
+  mylcd.Print_String("Score: ", 200, 104);
+  mylcd.Print_Number_Int(score, 270, 104, 0, ' ', 16);
 
   // Next Piece text because I dont feel like rendering the next piece
   mylcd.Set_Text_colour(BLUE);
@@ -501,7 +520,7 @@ void renderMisc() {
       mylcd.Print_String("L Piece", 200, 120);
       break;
     case 4:
-      mylcd.Print_String("Block Piece", 200, 120);
+      mylcd.Print_String("O Piece", 200, 120);
       break;
     case 5:
       mylcd.Print_String("S Piece", 200, 120);
@@ -512,6 +531,43 @@ void renderMisc() {
     case 7:
       mylcd.Print_String("Z Piece", 200, 120);
       break;
+  }
+}
+
+void gameOver() {
+  clearScreen();
+  int randomMessage = random(1, 5);
+  if (score >= 10) {
+    // win
+    mylcd.Set_Text_Mode(0);
+    mylcd.Set_Text_colour(GREEN);
+    mylcd.Set_Text_Size(2);
+    mylcd.Print_String("Your Safe", (width / 2) - 50, (height / 2));
+  }
+  else {
+    // wetris
+    mylcd.Set_Text_Mode(0);
+    mylcd.Set_Text_colour(CYAN);
+    mylcd.Set_Text_Size(2);
+    switch (randomMessage){
+      case 1: 
+        mylcd.Print_String("Sorry not sorry.", (width / 2) - 150, (height / 2));
+        break;
+      case 2:
+        mylcd.Print_String("Need a napkin?", (width / 2) - 150, (height / 2));
+        break;
+      case 3:
+        mylcd.Print_String("You needed a wash anyway.", (width / 2) - 150, (height / 2));
+        break;
+      case 4:
+        mylcd.Print_String("Your glasses looked dirty.", (width / 2) - 150, (height / 2));
+        break;
+    }
+  }
+  mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
+  while (button1Val == LOW) {
+    // just sits here until restart
+    button1Val = digitalRead(button1Pin);
   }
 }
 
