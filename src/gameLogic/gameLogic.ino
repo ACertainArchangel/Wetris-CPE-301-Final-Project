@@ -107,7 +107,7 @@ void setup() {
   initBoard();
   initPiece();
   mylcd.Init_LCD();
-  mylcd.setRotation(2); // Landscape mode
+  mylcd.setRotation(2); // Upside down
   clearScreen();
 }
 
