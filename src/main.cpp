@@ -71,3 +71,8 @@ void loop() {
     }
 
 }
+
+
+uint8_t value = ReadPotentiometer::read();
+UARTLib::write(value);               // send raw value
+UARTLib::writeString("High\r\n");    // send a message
