@@ -12,3 +12,4 @@ This is a place for us to put what pins and other hardware we want so we aren't 
 |Button 3(pin 4)    |Roman           |Rotation Movement        |
 |LCD(pins 7-10)     |Roman           |LCD connections          |
 |LCD(Dig. Pins50-52)|Roman           |LCD connections          |
+|LCD LED(pin2)      |Roman           |No idea                  |

@@ -2,6 +2,11 @@
 // Shouldn't need this
 //#include "Arduino.h"
 
+Position::Position() {
+    row = 0;
+    col = 0;
+}
+
 Position::Position(int x, int y) {
     row = x;
     col = y;

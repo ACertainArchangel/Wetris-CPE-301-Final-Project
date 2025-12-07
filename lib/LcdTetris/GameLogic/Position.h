@@ -6,6 +6,7 @@
 #define Position_h
 class Position {
     public:
+        Position();
         Position(int x, int y);
         int getRow();
         int getCol();
