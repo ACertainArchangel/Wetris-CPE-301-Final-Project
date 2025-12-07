@@ -3,32 +3,32 @@
 
 namespace WaterGun {
 
-    const int SOLENOID_PIN = 7;
-    const unsigned long PULSE_DURATION = 200;
-    unsigned long lastShotTime = 0;
-    bool shooting = false;
+    const int FWD_PIN = 22;
+    const int BACK_PIN = 23;
+    bool shot = false;
 
     void setup() {
-        pinMode(SOLENOID_PIN, OUTPUT);
-        digitalWrite(SOLENOID_PIN, LOW);
+        pinMode(FWD_PIN, OUTPUT);
+        pinMode(BACK_PIN, OUTPUT);
+        digitalWrite(FWD_PIN, LOW);
+        digitalWrite(BACK_PIN, HIGH);
     }
 
     bool shoot() {
-        unsigned long currentTime = millis();
+        if (!shot) {
 
-        if (!shooting) {
-            digitalWrite(SOLENOID_PIN, HIGH);
-            lastShotTime = currentTime;
-            shooting = true;
-            return true;
+            //Make doubly sure both are low in case of some bizzare hardware bug or problem with someone else's code.
+            //This is to prevent a short.
+
+            digitalWrite(BACK_PIN, LOW);
+            digitalWrite(FWD_PIN, LOW);
+
+            int startTime = millis(); while (millis() - startTime < 500) {};
+
+            digitalWrite(FWD_PIN, HIGH);
+            shot = true;
         }
-
-        if (shooting && currentTime - lastShotTime >= PULSE_DURATION) {
-            digitalWrite(SOLENOID_PIN, LOW);
-            shooting = false;
-        }
-
-        return false;
+        return shot;
     }
 
 }

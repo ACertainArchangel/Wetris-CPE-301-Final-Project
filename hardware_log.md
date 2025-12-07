@@ -13,3 +13,5 @@ This is a place for us to put what pins and other hardware we want so we aren't 
 |LCD(pins 7-10)     |Roman           |LCD connections          |
 |LCD(Dig. Pins50-52)|Roman           |LCD connections          |
 |LCD LED(pin2)      |Roman           |No idea                  |
+|FWD Pin (22)       |Son+Gabe        |Drive actuator           |
+|REV Pin (23)       |Son+Gabe        |Drive actuator           |
