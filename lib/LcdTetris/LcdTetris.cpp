@@ -355,7 +355,7 @@ bool isRowFull(int row) {
   }
   return true;
 }
-/// TODO: broke
+
 bool pieceFits() {
   rotationCopy();
   for(int x = 0; x < 4; x++) {
@@ -429,13 +429,15 @@ void dropPiece() {
   initPiece();
 }
 
-void moveBoardDown() {
+void moveBoardDown(int rowsCleared) {
   // starts at row 24 because those at the lowest row cant be moved down
-  for(int x = 23; x > 0; x--) {
-    for(int y = 0; y < 10; y++) {
-      if(gameBoard[x + 1][y] == 0) {
-        gameBoard[x + 1][y] = gameBoard[x][y];
-        gameBoard[x][y] = 0;
+  for(int rows = 0; rows < rowsCleared; rows++) {
+    for(int x = 23; x > 0; x--) {
+      for(int y = 0; y < 10; y++) {
+        if(gameBoard[x + 1][y] == 0) {
+          gameBoard[x + 1][y] = gameBoard[x][y];
+          gameBoard[x][y] = 0;
+        }
       }
     }
   }
@@ -443,15 +445,17 @@ void moveBoardDown() {
 
 void checkTetris() {
   bool rowCleared = false;
+  int rowsCleared = 0;
   for (int x = 0; x < 25; x++) {
     if (isRowFull(x)) {
       clearRow(x);
       score++;
+      rowsCleared++;
       rowCleared = true;
     }
   }
   if (rowCleared) {
-    moveBoardDown();
+    moveBoardDown(rowsCleared);
     clearScreen();
   }
   // score check
@@ -621,7 +625,7 @@ void renderMisc() {
   // Next Piece text because I dont feel like rendering the next piece
   mylcd.Set_Text_colour(BLUE);
   mylcd.Set_Text_Size(2);
-  switch (currentPiece) {
+  switch (nextPiece) {
     case 1:
       mylcd.Print_String("I Piece", 200, 120);
       break;
