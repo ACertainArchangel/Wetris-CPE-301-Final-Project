@@ -4,6 +4,7 @@
 #include <WaterGun.h>
 #include <stdint.h>
 #include <ReadPotentiometer.h>
+#include <UARTLib.h>
 
 #define SAFETY_THRESHOLD 17
 #define MUSIC_SPEED 1.0
@@ -20,13 +21,16 @@ void setup() {
     init();
     sei();
     UBRR0 = 103; //9600 baud rate
-    Serial.begin(9600);
-    Serial.println("Setup starting...");
+    UARTLib::writeString("Setup starting...\n");
     LcdTetris::setup();
     MusicPlayer::setup();
-    Serial.println("Music initialized - channels on pins 11, 10, 6");
+    UARTLib::writeString("Music initialized - channels on pins 11, 10, 6\n");
     WaterGun::setup();
-    Serial.println("Setup complete!");
+    UARTLib::writeString("Setup complete!\n");
+    if (!UARTLib::isInitialized()) {
+        UARTLib::setup(9600);
+    }
+    ReadPotentiometer::setup();
 }
 
 void loop() {

@@ -37,6 +37,10 @@ namespace UARTLib {
         }
     }
 
+    bool isInitialized() {
+        return (*myUCSR0B & 0x18) != 0; // Check if RX and TX are enabled
+    }
+
 }
 
 // if there is a main: 

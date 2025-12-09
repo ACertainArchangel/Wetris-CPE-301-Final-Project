@@ -4,6 +4,7 @@
 #include <string.h>
 #include <LCDWIKI_GUI.h> //Core graphics library
 #include <LCDWIKI_SPI.h> //Hardware-specific library
+#include "UARTLib.h"
 
 namespace LcdTetris{
 
@@ -128,11 +129,13 @@ namespace LcdTetris{
     int height = mylcd.Get_Display_Height();
 
     void setup() {
-        Serial.begin(9600);
+        if (!UARTLib::isInitialized()) {
+            UARTLib::setup(9600);
+        }
         pinMode(button1Pin, INPUT_PULLUP);
         pinMode(button2Pin, INPUT_PULLUP);
         pinMode(button3Pin, INPUT_PULLUP);
-        randomSeed(analogRead(0));
+        randomSeed(analogRead(1)); // seed random with noise from unconnected analog pin
         initBoard();
         initPiece();
         mylcd.Init_LCD();
@@ -371,7 +374,7 @@ bool pieceFits() {
       Serial.print(currentrotation[x].getCol());
       Serial.print(" + offset=");
       Serial.print(offSetCol);
-      Serial.println(")");
+      UARTLib::writeString(")");
       return false;
     }
   }
@@ -386,15 +389,15 @@ void processInputs() {
   // }
   if (button1Val == LOW && button1LastVal == HIGH) {
     moveLeft();
-    Serial.println("B1 pressed (left)");
+    UARTLib::writeString("B1 pressed (left)");
   }
   if (button2Val == LOW && button2LastVal == HIGH) {
     moveRight();
-    Serial.println("B2 pressed (right)");
+    UARTLib::writeString("B2 pressed (right)");
   }
   if (button3Val == LOW && button3LastVal == HIGH) {
     rotatePieceCW();
-    Serial.println("B3 pressed");
+    UARTLib::writeString("B3 pressed");
   }
   button1LastVal = button1Val;
   button2LastVal = button2Val;
@@ -422,7 +425,7 @@ void clearRow(int row) {
 void dropPiece() {
   offSetRow = 25;
   while (!pieceFits()) {
-    Serial.println("stuck");
+    UARTLib::writeString("stuck");
     offSetRow--;
   }
   placePiece();
@@ -526,7 +529,7 @@ void moveLeft() {
   } else {
     pieceChanged = true;
   }
-  Serial.println("offSetCol: ");
+  UARTLib::writeString("offSetCol: ");
   Serial.println(offSetCol);
 }
 void moveRight() {
@@ -536,7 +539,7 @@ void moveRight() {
   } else {
     pieceChanged = true;
   }
-  Serial.println("offSetCol: ");
+  UARTLib::writeString("offSetCol: ");
   Serial.println(offSetCol);
 }
 
@@ -551,7 +554,7 @@ void movePieceDown() {
   if (offSetRow >= 23) {
     placePiece();
   }
-  Serial.println("offSetRow: ");
+  UARTLib::writeString("offSetRow: ");
   Serial.println(offSetRow);
 }
 
@@ -579,7 +582,6 @@ void initPiece() {
   offSetRow = 3;
   offSetCol = 5;
   rotationCopy();
-  //Serial.println(currentPiece);
 }
 
 /// Rendering Methods
@@ -771,25 +773,9 @@ void renderPiece() {
       startingX = (currentrotation[x].getCol() + offSetCol) * size;
       endX = (currentrotation[x].getCol() + offSetCol + 1) * size; // this seemed to fix it for now
     }
-    // Serial.print("offSetRow: ");
-    // Serial.println(offSetRow);
-    // Serial.print("offSetCol: ");
-    // Serial.println(offSetCol);
-    // Serial.print("Piece Row: ");
-    // Serial.println(currentrotation[x].getRow());
-    // Serial.print("Piece Col: ");
-    // Serial.println(currentrotation[x].getCol());
 
-    // Serial.print("starting X: ");
-    // Serial.println(startingX);
-    // Serial.print("starting Y: ");
-    // Serial.println(startingY);
-    // Serial.print("endX: ");
-    // Serial.println(endX);
-    // Serial.print("endY: ");
-    // Serial.println(endY);
     mylcd.Draw_Rectangle(startingX, startingY, endX, endY);
-    //mylcd.Draw_Rectangle(0, 0, 19, 19);
+
   }
 }
     
