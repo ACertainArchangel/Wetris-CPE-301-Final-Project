@@ -366,15 +366,15 @@ bool pieceFits() {
     int absRow = currentrotation[x].getRow() + offSetRow;
     
     if ((gameBoard[absRow][absCol] != 0) || (absRow > 24) || (absCol > 9) || (absRow < 0) || (absCol < 0)) {
-      Serial.print("Block ");
-      Serial.print(x);
-      Serial.print(" at absCol=");
-      Serial.print(absCol);
-      Serial.print(" (rel=");
-      Serial.print(currentrotation[x].getCol());
-      Serial.print(" + offset=");
-      Serial.print(offSetCol);
-      UARTLib::writeString(")");
+      UARTLib::writeString("Block ");
+      UARTLib::writeString(String(x).c_str());
+      UARTLib::writeString(" at absCol=");
+      UARTLib::writeString(String(absCol).c_str());
+      UARTLib::writeString(" (rel=");
+      UARTLib::writeString(String(currentrotation[x].getCol()).c_str());
+      UARTLib::writeString(" + offset=");
+      UARTLib::writeString(String(offSetCol).c_str());
+      UARTLib::writeString(")\n");
       return false;
     }
   }
@@ -389,15 +389,15 @@ void processInputs() {
   // }
   if (button1Val == LOW && button1LastVal == HIGH) {
     moveLeft();
-    UARTLib::writeString("B1 pressed (left)");
+    UARTLib::writeString("B1 pressed (left)\n");
   }
   if (button2Val == LOW && button2LastVal == HIGH) {
     moveRight();
-    UARTLib::writeString("B2 pressed (right)");
+    UARTLib::writeString("B2 pressed (right)\n");
   }
   if (button3Val == LOW && button3LastVal == HIGH) {
     rotatePieceCW();
-    UARTLib::writeString("B3 pressed");
+    UARTLib::writeString("B3 pressed\n");
   }
   button1LastVal = button1Val;
   button2LastVal = button2Val;
@@ -425,7 +425,7 @@ void clearRow(int row) {
 void dropPiece() {
   offSetRow = 25;
   while (!pieceFits()) {
-    UARTLib::writeString("stuck");
+    UARTLib::writeString("stuck\n");
     offSetRow--;
   }
   placePiece();
@@ -529,8 +529,8 @@ void moveLeft() {
   } else {
     pieceChanged = true;
   }
-  UARTLib::writeString("offSetCol: ");
-  Serial.println(offSetCol);
+  UARTLib::writeString("offSetCol: \n");
+  UARTLib::writeString(String(offSetCol).c_str());
 }
 void moveRight() {
   offSetCol++;
@@ -539,8 +539,8 @@ void moveRight() {
   } else {
     pieceChanged = true;
   }
-  UARTLib::writeString("offSetCol: ");
-  Serial.println(offSetCol);
+  UARTLib::writeString("offSetCol: \n");
+  UARTLib::writeString(String(offSetCol).c_str());
 }
 
 void movePieceDown() {
@@ -554,8 +554,8 @@ void movePieceDown() {
   if (offSetRow >= 23) {
     placePiece();
   }
-  UARTLib::writeString("offSetRow: ");
-  Serial.println(offSetRow);
+  UARTLib::writeString("offSetRow: \n");
+  UARTLib::writeString(String(offSetRow).c_str());
 }
 
 /// System
