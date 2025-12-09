@@ -12,7 +12,7 @@ wordlist = [
     #"arduino",
     "Serial",
     "Analog",
-    "Analogue",
+    #"Analogue", #bri'ish 
     "Digital",
     #"Pin",
     "PWM",
