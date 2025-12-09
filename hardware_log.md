@@ -10,7 +10,7 @@ This is a place for us to put what pins and other hardware we want so we aren't 
 |Button 1(pin13)    |Roman           |Left Movement            |
 |Button 2(pin12)    |Roman           |Right Movement           |
 |Button 3(pin 4)    |Roman           |Rotation Movement        |
-|LCD(pins 7-10)     |Roman           |LCD connections          |
+|LCD(pins 8-10)     |Roman           |LCD connections          |
 |LCD(Dig. Pins50-52)|Roman           |LCD connections          |
 |LCD LED(pin2)      |Roman           |No idea                  |
 |FWD Pin (22)       |Son+Gabe        |Drive actuator           |

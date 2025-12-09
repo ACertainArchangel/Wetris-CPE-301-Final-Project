@@ -114,7 +114,7 @@ namespace LcdTetris{
     #define CS   10    
     #define CD   9
     #define RST  8
-    #define LED  7   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
+    #define LED  2   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
 
     LCDWIKI_SPI mylcd(MODEL,CS,CD,RST,LED); //model,cs,dc,reset,led
     //define some colour values

@@ -1,11 +1,22 @@
 ### TODO LIST:
 
-* We need to use interrupts for the buttons. (Son)
+#### Roman:
+* There is a bug where blocks get left floating when they fall onto other blocks and not the floor still
+* About self on README.md and REPORT.tex
+* Send your videos to me so I can put them in the google drive folder
 
-* We need to use manual register manipulation for the water gun et al. (Gabe)
 
-* There is a bug where blocks get left floating when they fall onto other blocks and not the floor still (Roman)
+#### Jorge:
+* Send your videos to me so I can put them in the google drive folder
+* About self on README.md and REPORT.tex
+* We need to use interrupts for the buttons.
+* Manual register manipulation fixes
 
-* Video (???)
+#### Gabe:
+* Final report framework
+* Schematic
+* About self on README.md and REPORT.tex
 
-* Final schematic (Gabe)
+
+#### Son:
+* About self on README.md and REPORT.tex
