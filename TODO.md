@@ -5,8 +5,6 @@
 
 * We need to use manual register manipulation for the water gun et al. (Gabe)
 
-* We need to swap out all the Serial stuff to use Son's library (Jorge)
-
 * Video (???)
 
 * Final schematic (???)
