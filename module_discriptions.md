@@ -20,9 +20,9 @@ Pin 9  -> CD pin on LCD
 Pin 10 -> CS pin on LCD
 Pin 12 -> Right Button
 Pin 13 -> Left Button
-Pin 50 -> ???
-Pin 51 -> ???
-Pin 52 -> ???
+Pin 50 -> SDO
+Pin 51 -> SDI
+Pin 52 -> SCK
 
 ## Son and Gabe - Water Gun
 Wire 2 optocouplers so they control the current flowing from REV to V- and FWD to V- on the relay, and control the optocouplers with pin 22 for the FWD optocoupler and 23 for the REV one, then wire the two putputs of the relay into the power pins actuator using a pigtail connector.
