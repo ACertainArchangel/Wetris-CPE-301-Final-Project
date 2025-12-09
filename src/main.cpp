@@ -1,5 +1,3 @@
-//Feel free to modify main if you code better than me
-//You can add parameters you want to calls to your thing or change how your module works -> up to you
 #include <Arduino.h>
 #include <LcdTetris.h>
 #include <MusicPlayer.h>

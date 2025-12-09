@@ -18,14 +18,14 @@ Note that the person in charge aught to utilise help from others.
 | Task Name |Person In Charge |Due Date | Done |
 |---|---|---:|:---:|
 |Create 3D Casing Model & Assembly Plan|Gabe         |Nov 24 | [✅] |
-|3D print casing                       |Gabe+Jorge   |Nov 24 | [ ] |
-|Create Music Module                   |Gabe         |Nov 24 | [ ] |
-|Create Tetris Module                  |Roman et al  |Nov 24 | [ ] |
+|3D print casing                       |Gabe         |Nov 24 | [✅] |
+|Create Music Module                   |Gabe         |Nov 24 | [✅] |
+|Create Tetris Module                  |Roman        |Nov 24 | [✅] |
 
 ## Phase 2
 | Task Name |Person In Charge |Due Date | Done |
 |---|---|---:|:---:|
-|Assemble                              |Gabe+Jorge   |Dec 1 | [ ] |
+|Assemble                              |Gabe         |Dec 1 | [✅] |
 
 
 ## Phase 3

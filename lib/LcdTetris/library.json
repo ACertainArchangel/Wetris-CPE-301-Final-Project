@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "Non-blocking LCD Tetris game logic",
     "authors": [
-      { "name": "Roman Rosburg <I think that's your last name?>" }
+      { "name": "Roman Rosburg (main author)" },
+      { "name": "Gabriel Jordaan (minor patches)" }
     ],
     "dependencies": [
       { "name": "LCDWIKI_GUI" },

@@ -3,6 +3,6 @@
     "version": "1.0.0",
     "description": "Non-blocking library to read the potentiometer and pass the adc value",
     "authors": [
-        { "name": "Whoever writes this in the future" }
+        { "name": "Dieufainson Jean" }
     ]
 }
