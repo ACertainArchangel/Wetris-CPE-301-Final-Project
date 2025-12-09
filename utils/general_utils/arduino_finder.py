@@ -26,7 +26,7 @@ wordlist = [
     "DigitalRead",
     "AnalogRead",
     "AnalogWrite",
-    "millis",
+    #"millis",
     "delay",
     "setup"
 ]
