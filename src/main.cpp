@@ -6,7 +6,7 @@
 #include <ReadPotentiometer.h>
 #include <UARTLib.h>
 
-#define SAFETY_THRESHOLD 17
+#define SAFETY_THRESHOLD 1 //IF YOU CHANGE THIS, CHANGE IT IN LcdTetris.cpp TOO
 #define MUSIC_SPEED 1.0
 
 uint8_t stress_level;

@@ -4,7 +4,10 @@
 #include <string.h>
 #include <LCDWIKI_GUI.h> //Core graphics library
 #include <LCDWIKI_SPI.h> //Hardware-specific library
+#include <stdlib.h>
 #include "UARTLib.h"
+
+#define SAFETY_THRESHOLD 1 // YOU MUST UPDATE THIS IF YOU CHANGE IT IN main.cpp
 
 namespace LcdTetris{
 
@@ -203,7 +206,8 @@ namespace LcdTetris{
         mylcd.Set_Text_Size(2);
         mylcd.Print_String("You're Safe!", (width / 2) - 70, (height / 2) - 20);
         mylcd.Print_String("Final Score: ", (width / 2) - 80, (height / 2) + 10);
-        mylcd.Print_Number_Int(score, (width / 2) + 50, (height / 2) + 10, 0, ' ', 16);
+        mylcd.Print_Number_Int(score, (width / 2) + 70, (height / 2) + 10, 0, ' ', 16);
+        mylcd.Print_String("Press reset to play again!", (width / 2) - 155, (height / 2) + 40);
     }
 
     void thanks_looser(){
@@ -229,7 +233,10 @@ namespace LcdTetris{
             break;
         }
         mylcd.Print_String("Final Score: ", (width / 2) - 80, (height / 2) + 40);
-        mylcd.Print_Number_Int(score, (width / 2) + 50, (height / 2) + 40, 0, ' ', 16);
+        mylcd.Print_Number_Int(score, (width / 2) + 70, (height / 2) + 40, 0, ' ', 16);
+        mylcd.Print_String("To reset, turn off game,", (width / 2) - 150, (height / 2) + 70);
+        mylcd.Print_String("manually reset actuator,", (width / 2) - 130, (height / 2) + 95);
+        mylcd.Print_String("and refill syringe!", (width / 2) - 120, (height / 2) + 120);
     }
 
     int get_score(){
@@ -554,8 +561,6 @@ void movePieceDown() {
   if (offSetRow >= 23) {
     placePiece();
   }
-  UARTLib::writeString("offSetRow: \n");
-  UARTLib::writeString(String(offSetRow).c_str());
 }
 
 /// System
@@ -621,8 +626,7 @@ void renderMisc() {
   // Score Render
   mylcd.Set_Text_colour(CYAN);
   mylcd.Set_Text_Size(2);
-  mylcd.Print_String("Score: ", 200, 104);
-  mylcd.Print_Number_Int(score, 270, 104, 0, ' ', 16);
+  mylcd.Print_String(("Score:" + String(score) + "/" + String(SAFETY_THRESHOLD)).c_str(), 200, 104);
 
   // Next Piece text because I dont feel like rendering the next piece
   mylcd.Set_Text_colour(BLUE);
