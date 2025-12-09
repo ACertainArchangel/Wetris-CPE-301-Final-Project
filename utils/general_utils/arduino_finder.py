@@ -14,7 +14,7 @@ wordlist = [
     "Analog",
     "Analogue",
     "Digital",
-    "Pin",
+    #"Pin",
     "PWM",
     "I2C",
     "SPI",
@@ -26,6 +26,7 @@ wordlist = [
     "DigitalRead",
     "AnalogRead",
     "AnalogWrite",
+    "pinMode",
     #"millis",
     "delay",
     #"setup"
