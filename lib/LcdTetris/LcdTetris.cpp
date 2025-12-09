@@ -441,7 +441,7 @@ void dropPiece() {
 
 void moveBoardDown(int rowsCleared) {
   // starts at row 24 because those at the lowest row cant be moved down
-  for(int rows = 0; rows < rowsCleared; rows++) {
+  for(int rows = 0; rows < rowsCleared + 5; rows++) {
     for(int x = 23; x > 0; x--) {
       for(int y = 0; y < 10; y++) {
         if(gameBoard[x + 1][y] == 0) {
