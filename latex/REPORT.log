@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 22:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 23:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -235,24 +235,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./REPORT.aux)
 \openout1 = `REPORT.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
  (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count301
@@ -272,7 +272,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 14.
+Package hyperref Info: Link coloring OFF on input line 21.
  (./REPORT.out) (./REPORT.out)
 \@outlinefile=\write3
 \openout3 = `REPORT.out'.
@@ -313,9 +313,9 @@ Package hyperref Info: Link coloring OFF on input line 14.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 17.
+(Font)              <14.4> on input line 24.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 17.
+(Font)              <7> on input line 24.
 (./REPORT.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 4.
@@ -334,37 +334,103 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 [2]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 37.
 
-[3]
-
-[4]
-
-[5
-
-]
-Overfull \hbox (22.50734pt too wide) in paragraph at lines 141--143
-[]$\OT1/cmtt/m/n/12 https : / / drive . google . com / drive / folders / 1Q4Bg4BSVfFWwpvJh6P310yMYkDlfBsM4 ? usp =
+Underfull \hbox (badness 1043) in paragraph at lines 40--40
+[]|\OT1/cmr/m/n/10.95 UNR LI-BRARIES TRANS-
  []
 
-<photos/Gabriel_Jordaan.jpg, id=146, 1210.5225pt x 1608.0075pt>
-File: photos/Gabriel_Jordaan.jpg Graphic file (type jpg)
-<use photos/Gabriel_Jordaan.jpg>
-Package pdftex.def Info: photos/Gabriel_Jordaan.jpg  used on input line 150.
-(pdftex.def)             Requested size: 85.35826pt x 113.38171pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+\OT1/cmr/m/n/10.95 re-sis-tors, bread-board, 9V
+ []
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 60--60
+\OT1/cmr/m/n/10.95 bat-tery, USB ca-ble, opto-
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 61--61
+[]|\OT1/cmr/m/n/10.95 Took a lit-tle from an-other
+ []
+
+
+
+[3]
+Overfull \hbox (23.50734pt too wide) in paragraph at lines 73--79
+[]$\OT1/cmtt/m/n/12 https : / / cdn . robotshop . com / media / a / ard / rb-[]ard-[]33 / pdf / arduinomega2560datasheet .
+ []
+
+
+Overfull \hbox (16.83234pt too wide) in paragraph at lines 73--79
+[]$\OT1/cmtt/m/n/12 https : / / www . alldatasheet . com / datasheet-[]pdf / download / 107092 / ATMEL / ATMEGA2560 .
+ []
+
+
+
+[4]
+Overfull \hbox (3.98233pt too wide) in paragraph at lines 92--95
+[]$\OT1/cmtt/m/n/12 https : / / www . amazon . com / dp / B0C43BNSQM ? ref _ =ppx _ hzsearch _ conn _ dt _ b _ fed _ asin _
+ []
+
+
+Overfull \hbox (49.70735pt too wide) in paragraph at lines 106--109
+[]$\OT1/cmtt/m/n/12 https : / / www . amazon . com / Weasch-[]Forward-[]Pre-[]Wired-[]Actuator-[]Reversing / dp / B0FJQV4316 ?
+ []
+
+
+Overfull \hbox (12.65733pt too wide) in paragraph at lines 106--109
+\OT1/cmtt/m/n/12 pd _ rd _ w = 4c3sO & content-[]id = amzn1 . sym . 97c08ff8-[]4f39-[]4f9e-[]b360-[]8dbdbec34ee6 & pf _
+ []
+
+
+Overfull \hbox (5.98233pt too wide) in paragraph at lines 106--109
+\OT1/cmtt/m/n/12 rd _ p = 97c08ff8-[]4f39-[]4f9e-[]b360-[]8dbdbec34ee6 & pf _ rd _ r = YHHMAAYABW9QQTN9YD5D & pd _
+ []
+
+
+Overfull \hbox (18.33234pt too wide) in paragraph at lines 106--109
+\OT1/cmtt/m/n/12 rd _ wg = pirQI & pd _ rd _ r = 114b95df-[]9ba3-[]4874-[]ba37-[]76236030403c & pd _ rd _ i = B0FJQV4316 &
+ []
+
+
+
+[5]
 
 [6]
 
-[7 <./photos/Gabriel_Jordaan.jpg>]
+[7]
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 271--274
+
+[9
+
+]
+Overfull \hbox (22.50734pt too wide) in paragraph at lines 216--218
+[]$\OT1/cmtt/m/n/12 https : / / drive . google . com / drive / folders / 1Q4Bg4BSVfFWwpvJh6P310yMYkDlfBsM4 ? usp =
+ []
+
+<photos/Gabriel_Jordaan.jpg, id=227, 1210.5225pt x 1608.0075pt>
+File: photos/Gabriel_Jordaan.jpg Graphic file (type jpg)
+<use photos/Gabriel_Jordaan.jpg>
+Package pdftex.def Info: photos/Gabriel_Jordaan.jpg  used on input line 225.
+(pdftex.def)             Requested size: 85.35826pt x 113.38171pt.
+
+
+[10]
+
+[11 <./photos/Gabriel_Jordaan.jpg>]
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 346--349
 
  []
 
 
 
-[9
+[13
 
 ] (./REPORT.aux)
  ***********
@@ -372,21 +438,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `REPORT.out' has not changed.
-(rerunfilecheck)             Checksum: FDC60D242F5B19102AF007FB919883EB;2759.
+(rerunfilecheck)             Checksum: F319C1942F24B3F7264AD838985FB63D;4229.
  ) 
 Here is how much of TeX's memory you used:
- 12246 strings out of 474662
- 238558 string characters out of 5751110
- 616387 words of memory out of 5000000
- 35141 multiletter control sequences out of 15000+600000
- 565535 words of font info for 58 fonts, out of 8000000 for 9000
+ 12281 strings out of 474662
+ 239031 string characters out of 5751110
+ 621068 words of memory out of 5000000
+ 35160 multiletter control sequences out of 15000+600000
+ 567445 words of font info for 64 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 75i,8n,79p,993b,1039s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on REPORT.pdf (9 pages, 2015463 bytes).
+ 75i,10n,79p,1024b,1039s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on REPORT.pdf (13 pages, 2071677 bytes).
 PDF statistics:
- 216 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 182 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 318 PDF objects out of 1000 (max. 8388607)
+ 276 compressed objects within 3 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

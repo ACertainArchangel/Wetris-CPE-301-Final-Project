@@ -7,6 +7,13 @@
 \usepackage{siunitx}
 \geometry{margin=1in}
 
+% Define placeholder text command
+\newcommand{\placeholder}[1]{%
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\par\noindent Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+}
+
 \title{Wetris: CPE 301 Final Project}
 \author{Team Wetris (Team 42)}
 \date{December 12, 2025}
@@ -20,23 +27,91 @@
 \section{Project Description}
 Wetris is a suspenseful and slightly nerve-racking spin-off of Tetris, the classic block-stacking game. The player races to clear enough lines to reach the target score before their stack reaches the top, and if they fail, they get splashed with water! To make it even better, the spring powered water gun is very loud and is a garenteed jump scare even if you know it's coming. It makes for a great party game, and would go well as an attraction in an arcade.
 
-\section{Component Details}
+\section{Cost Analysis for this First Time Build}
 
-\begin{table}[h!]
+This cost analysis includes tools that will not need to be repurchased for future builds, such as the multimeter and crimping tool. These tools were necessary for the successful completion of this first build, and their costs are included to provide a comprehensive overview of the initial investment required for the Wetris project. A production version of Wetris could be built for significantly less, since the tools are one time purchases, and many of the components were purchased in higher quantities than necessary and the cost for those components could be spread across multiple builds. The largest cost would still be the 3d printed casing, but even that could be reduced with bulk printing or alternative manufacturing methods such as injection molding. A cost analysis for a production version is not included here, but may later be developed if there is interest in pursuing that avenue.
+
+\begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|}
+\small
+\begin{tabular}{|l|r|p{5cm}|}
 \hline
-\textbf{Component}          & \textbf{Qty}            & \textbf{Cost}   & \textbf{Purpose}                   \\ \hline
-Arduino Mega 2560          & 1 & \$45 & Main MCU for game logic and control \\ \hline
-LCD Display (ST7796S) & 1 & \$30 & Display game visuals \\ \hline
-Control Buttons & 4 & \$5 & User input for game control \\ \hline
-Water Gun Actuator & 1 & \$20 & Actuate water gun mechanism \\ \hline
-Potentiometer & 1 & \$2 & Adjust game settings \\ \hline
-Speaker/Audio Output & 1 & \$3 & Provide audio feedback \\ \hline
+\textbf{Material} & \textbf{Total Price} & \textbf{Notes} \\ \hline
+3D printed casing & \$263.52 & UNR LIBRARIES TRANSACTION 201937 DLM \\ \hline
+Arduino ATmega 2560 & \$54.02 & Amazon \\ \hline
+Multimeter & \$34.63 & Amazon \\ \hline
+Crimping tool & \$34.63 & Amazon \\ \hline
+LCD Display & \$22.72 & Amazon (Jorge also bought us a second one for testing) \\ \hline
+Wire stripper & \$20.56 & ACE hardware \\ \hline
+Door lock actuator & \$17.05 & Amazon \\ \hline
+Relay Module & \$14.42 & Amazon \\ \hline
+Syringes & \$14.06 & Amazon \\ \hline
+12V power adapter & \$14.06 & Amazon \\ \hline
+Extension cord & \$12.98 & Amazon \\ \hline
+Caulk gun & \$10.82 & Newborn DC012 from ACE hardware \\ \hline
+Pin connector for actuator & \$10.27 & Amazon \\ \hline
+Electrical tape & \$9.30 & ACE hardware \\ \hline
+Wire & \$8.66 & ACE hardware \\ \hline
+Inline fuse holder & \$7.13 & ACE hardware \\ \hline
+Buzzers & \$6.49 & Amazon \\ \hline
+Sprinkler head & \$5.40 & ACE hardware \\ \hline
+Fuses & \$5.40 & Amazon \\ \hline
+Barrel jack splitter & \$4.30 & Amazon \\ \hline
+Misc. we on hand & \$0.00 & Jumper wires, buttons, tools, resistors, breadboard, 9V battery, USB cable, opto-couplers etc. \\ \hline
+Epoxy & \$0.00 & Took a little from another project of Gabe's \\ \hline
+\hline
+\multicolumn{1}{|r|}{\textbf{Grand Total:}} & \textbf{\$570.43} & \\ \hline
 \end{tabular}
-\caption{Component details of Wetris system}
+\caption{Component cost breakdown for Wetris system}
 \label{tab:components}
 \end{table}
+
+\section{Component Details}
+This section provides detailed information about each major component used in the Wetris system, including their specifications and roles within the project.
+
+\subsection{Arduino Mega 2560}
+Central microcontroller unit (MCU) responsible for managing game logic, user inputs, and controlling peripherals.
+Full technical specifications can be found at: \\
+\url{https://cdn.robotshop.com/media/a/ard/rb-ard-33/pdf/arduinomega2560datasheet.pdf}
+for the development board and \\
+\url{https://www.alldatasheet.com/datasheet-pdf/download/107092/ATMEL/ATMEGA2560.html}
+for the microcontroller itself.
+
+\subsection{LCD Display (ST7796S controller)}
+Hosyond 4.0" TN Capacitive Touch Display\\
+Display Controller: ST7796S driver IC\\
+Touch Controller: FT6336U capacitive touch IC (not used in project)\\
+Size: 4.0" diagonal, 320x480 resolution\\
+Physical Dimensions: 60.88x108.0x14.80mm (WxHxD)\\
+Interface: 4-wire SPI (display) + I2C (touch)\\
+Power: 5V/3.3V compatible, 0.5W consumption (We used 5V)\\
+Connectivity: 14P 2.54mm header + FPC connector\\
+Additional: Micro SD slot, LED backlight (300 cd/m²) (Both unused in project)
+
+\subsection{Door Lock Actuator}
+The door lock actuator used is intended for a Dodge Grand Caravan, and operates on 12V DC and draws 2A. In order to reverse the direction of the actuator, the polarity of the voltage applied to it must be reversed. It is energy efficient, only drawing current when moving, and has a built-in limit switch to stop current flow when fully extended or retracted. Full specifications could not be found past what the amazon page provided. Pins had to be experementally probed to determine their propper function. Two pins still have unknown function and are left unconnected. They are possibly for feedback.
+More information can be found at: \\
+\url{https://www.amazon.com/dp/B0C43BNSQM?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_3&th=1}
+
+\subsection{Fuse}
+Standard 3A automotive blade fuse used to protect the water gun actuator circuit from overcurrent conditions.
+
+\subsection{Potentiometer}
+Standard 10k ohm rotary potentiometer used to adjust game speed and music tempo.
+
+\subsection{Buzzers, Resistors, and Capacitors}
+Standard piezoelectric buzzers used for audio output, along with \qty{100}{\ohm} resistors and \qty{10}{\micro\farad} capacitors for signal conditioning and circuit protection.
+
+\subsection{Relay Module}
+Forward and Reverse Relay Module, 12V 10A Pre-Wired with LED Light, for Motor/Linear Actuator, Reversing Relay Module.
+More information can be found at: \\
+\url{https://www.amazon.com/Weasch-Forward-Pre-Wired-Actuator-Reversing/dp/B0FJQV4316?pd_rd_w=4c3sO&content-id=amzn1.sym.97c08ff8-4f39-4f9e-b360-8dbdbec34ee6&pf_rd_p=97c08ff8-4f39-4f9e-b360-8dbdbec34ee6&pf_rd_r=YHHMAAYABW9QQTN9YD5D&pd_rd_wg=pirQI&pd_rd_r=114b95df-9ba3-4874-ba37-76236030403c&pd_rd_i=B0FJQV4316&psc=1&ref_=pd_basp_d_rpt_ba_s_1_t}
+
+\subsection{Optocouplers}
+4N35 optocouplers with a foreward voltage of \qty{1.18}{\volt} and a maximum collector-emitter voltage of \qty{30}{\volt} used to isolate the high current 12V actuator control circuit from the low voltage 5V logic of the Arduino.
+More information can be found at: \\
+\url{https://www.alldatasheet.com/datasheet-pdf/view/98359/FAIRCHILD/4N35.html}
+
 
 \section{System Overview}
 
@@ -92,7 +167,7 @@ In order to reach the back of the casing where the MCU is mounted from the LCD a
 The music module uses output compare pins OC1A (pin 11), OC3A (pin 5), and OC4A (pin 6) to output PWM signals to three separate piezo buzzers. Each buzzer is connected in series with a 100 ohm resistor to limit current and a \qty{10}{\micro\farad} capacitor to smooth the signal. The code directly loads frequency and duration values into memory and iterates through them to play the song. This method is highly memory intensive, but allows for accurate timing and frequency control. The music was converted from midi format to c style arrays using a custom python script found in the repository.
 
 \subsubsection{Water Gun Module}
-In order to isolate the high current 12V power supply used to drive the water gun actuator from the 5V logic of the Arduino, we used a relay module controlled by opto-couplers. The relay module is powered by the 12V supply, and the opto-couplers are powered by the 5V supply from the Arduino. The opto-couplers are connected to digital pins 22 and 23 on the Arduino, which control the forward and reverse movement of the actuator respectively. When the game is over and the safety threshold has not been reached, the Arduino activates the relay in reverse to trigger the water gun mechanism. The foreward function is not used in normal operation, but is included for completeness.
+In order to isolate the high current 12V power supply used to drive the water gun actuator from the 5V logic of the Arduino, we used a relay module controlled by opto-couplers. The relay module is powered by the 12V supply, and the opto-couplers are powered by the 5V supply from the Arduino. The opto-couplers are connected to digital pins 22 and 23 on the Arduino, which control the forward and reverse movement of the actuator respectively. When the game is over and the safety threshold has not been reached, the Arduino activates the relay in reverse to trigger the water gun mechanism. The foreward function is not used in normal operation, but is included for completeness. Very importantly, an inline fuse is included in the 12V power line to protect against short circuits.
 
 \subsubsection{Potentiometer Module}
 The potentiometer is our most simple peripheral, being connected to the 5V and GND pins on the Arduino, with the wiper connected to analog pin A0. The potentiometer is used to adjust the speed of the game and music modules, allowing the player to customize their experience. Also allowing their friends to set it to an impossible speed in the middle of a game for extra fun.
@@ -276,6 +351,8 @@ We would also like to acknowledge the open-source libraries that made this proje
     \item LCDWIKI\_SPI and LCDWIKI\_GUI libraries - Created by the lcdwiki team (\url{https://github.com/lcdwiki/LCDWIKI_gui}), based on Adafruit GFX lib and Adafruit SPITFT lib, with init code from Rossum. Released under MIT license.
     \item Adafruit GFX and SPITFT libraries - For providing the foundational graphics and display functionality.
 \end{itemize}
+
+Thanks to Pastor David Minott for the idea of using a door lock actuator instead of a solenoid.
 
 Thanks to Nikolai Nekrasov for writing the original Korobeiniki song in 1861. (He's dead and can't sue us for copyright infringement right?)
 
