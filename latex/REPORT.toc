@@ -33,7 +33,7 @@
 \contentsline {section}{\numberline {9}Our Team}{23}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Gabriel Jordaan}{23}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Dieufainson Jean}{23}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Team Member 3}{24}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.3}Jorge Robles}{24}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}Team Member 4}{24}{subsection.9.4}%
 \contentsline {section}{\numberline {10}Acknowledgments}{25}{section.10}%
 \contentsline {section}{\numberline {11}Wetris Logo}{26}{section.11}%

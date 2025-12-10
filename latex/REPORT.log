@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 DEC 2025 12:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 DEC 2025 14:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -559,12 +559,12 @@ Underfull \hbox (badness 1270) in paragraph at lines 433--434
 [23 <./photos/Gabriel_Jordaan.jpg>]
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 504--507
+Underfull \hbox (badness 10000) in paragraph at lines 505--508
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
+Underfull \hbox (badness 10000) in paragraph at lines 514--515
 
  []
 
@@ -573,10 +573,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 513--514
 [25
 
 ]
-<photos/wetris_logo.png, id=404, 1027.84pt x 1027.84pt>
+<photos/wetris_logo.png, id=405, 1027.84pt x 1027.84pt>
 File: photos/wetris_logo.png Graphic file (type png)
 <use photos/wetris_logo.png>
-Package pdftex.def Info: photos/wetris_logo.png  used on input line 523.
+Package pdftex.def Info: photos/wetris_logo.png  used on input line 524.
 (pdftex.def)             Requested size: 362.37569pt x 362.38423pt.
 
 
@@ -588,7 +588,7 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `REPORT.out' has not changed.
-(rerunfilecheck)             Checksum: 9C271BD4CBB3460C3E5AE2AB63A11850;5489.
+(rerunfilecheck)             Checksum: 7E26398216DD0BF1B6721808DA5A5966;5481.
  ) 
 Here is how much of TeX's memory you used:
  12470 strings out of 474662
@@ -599,10 +599,10 @@ Here is how much of TeX's memory you used:
  319 hyphenation exceptions out of 8191
  75i,10n,79p,1024b,1050s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on REPORT.pdf (26 pages, 22607461 bytes).
+Output written on REPORT.pdf (26 pages, 22608949 bytes).
 PDF statistics:
- 487 PDF objects out of 1000 (max. 8388607)
- 403 compressed objects within 5 object streams
+ 488 PDF objects out of 1000 (max. 8388607)
+ 404 compressed objects within 5 object streams
  91 named destinations out of 1000 (max. 500000)
  403 words of extra memory for PDF output out of 10000 (max. 10000000)
 
