@@ -270,11 +270,10 @@ void setup() {
                 pieceChanged = false;
             }
             if (score != lastScore || currentPiece != lastPiece) {
-                
+                renderMisc();
                 lastScore = score;
                 lastPiece = currentPiece;
             }
-			renderMisc();
         }
         else {
             // Game over: blocks until left pressed, then reset
@@ -539,7 +538,7 @@ void dropPiece() {
 
 void moveBoardDown(int rowsCleared) {
   // starts at row 24 because those at the lowest row cant be moved down
-  for(int rows = 0; rows < rowsCleared; rows++) {
+  for(int rows = 0; rows < rowsCleared + 5; rows++) {
     for(int x = 23; x > 0; x--) {
       for(int y = 0; y < 10; y++) {
         if(gameBoard[x + 1][y] == 0) {
@@ -554,7 +553,6 @@ void moveBoardDown(int rowsCleared) {
 void checkTetris() {
   bool rowCleared = false;
   int rowsCleared = 0;
-  lastScore = score;
   for (int x = 0; x < 25; x++) {
     if (isRowFull(x)) {
       clearRow(x);
@@ -567,6 +565,20 @@ void checkTetris() {
     moveBoardDown(rowsCleared);
     clearScreen();
   }
+  // score check
+  // if (score >= 7) {
+  //   tickRate = 0.5;
+  // }
+  // else if (score >= 5) {
+  //   tickRate = 1;
+  // }
+  // else if (score >= 3) {
+  //   tickRate = 2;
+  // }
+  // else {
+  //   tickRate = 3;
+  // }
+
   renderBoard();
 }
 
@@ -711,8 +723,7 @@ void renderMisc() {
   // Score Render
   mylcd.Set_Text_colour(CYAN);
   mylcd.Set_Text_Size(2);
-  String scoreText = String("Score:") + String(score) + "/" + String(SAFETY_THRESHOLD);
-  mylcd.Print_String(scoreText.c_str(), 200, 104);
+  mylcd.Print_String(("Score:" + String(score) + "/" + String(SAFETY_THRESHOLD)).c_str(), 200, 104);
 
   // Next Piece text because I dont feel like rendering the next piece
   mylcd.Set_Text_colour(BLUE);
