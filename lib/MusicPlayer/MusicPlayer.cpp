@@ -1312,7 +1312,7 @@ void setup() {
 float stress_scaler = 1.0;
 void update(bool player_dry, uint8_t stress_level) {
     // Use fixed tempo for now - stress scaling can be added back later if needed
-    // stress_scaler = 0.5 + (stress_level+1)/256.0;
+    stress_scaler = 0.5 + (stress_level+1)/256.0;
 
     if(player_dry){
 

@@ -21,6 +21,10 @@ namespace UARTLib {
         *myUBRR0  = tbaud;
     }
 
+    bool kbhit() {
+        return (*myUCSR0A & RDA) != 0;
+    }
+
     uint8_t read() {
         while ((*myUCSR0A & RDA) == 0);
         return *myUDR0;

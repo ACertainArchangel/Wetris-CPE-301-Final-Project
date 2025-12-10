@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "UARTLib.h"
 
-#define SAFETY_THRESHOLD 1 // YOU MUST UPDATE THIS IF YOU CHANGE IT IN main.cpp
+#define SAFETY_THRESHOLD 17 // YOU MUST UPDATE THIS IF YOU CHANGE IT IN main.cpp
 
  namespace LcdTetris {
 
@@ -243,9 +243,10 @@ void setup() {
 
 
     bool update(uint16_t stress_level) {
+
         // Adjust tick rate based on stress level (higher stress = faster game)
-        // Map stress_level (0-255) to tickRate (1.0s to 0.1s)
-        tickRate = 1.0 - (stress_level / 255.0 * 0.9);
+        // Map stress_level (0-255) to tickRate (1.0s to 0.02s)
+        tickRate = 1.0 - (stress_level / 255.0 * 0.98);
         
         // Game loop
         if (!fail) {

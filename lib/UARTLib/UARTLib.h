@@ -7,4 +7,5 @@ namespace UARTLib {
     void write(uint8_t data);
     void writeString(const char* msg);
     bool isInitialized();
+    bool kbhit();
 }

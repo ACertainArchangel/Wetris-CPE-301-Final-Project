@@ -12,7 +12,7 @@
 #include <ReadPotentiometer.h>
 #include <UARTLib.h>
 
-#define SAFETY_THRESHOLD 1 //IF YOU CHANGE THIS, CHANGE IT IN LcdTetris.cpp TOO
+#define SAFETY_THRESHOLD 17 //IF YOU CHANGE THIS, CHANGE IT IN LcdTetris.cpp TOO
 #define MUSIC_SPEED 1.0
 
 uint8_t stress_level;
@@ -40,6 +40,15 @@ void setup() {
 }
 
 void loop() {
+
+    //Surprise water gun shooting to prank your friend!
+    if (UARTLib::isInitialized() && UARTLib::kbhit()) {
+        char receivedChar = UARTLib::read();
+        if (receivedChar == 'x') {
+            WaterGun::shoot();
+            UARTLib::writeString("Shooting water gun! Your friend will hate you!\n");
+        }
+    }
 
     stress_level = ReadPotentiometer::read();
 

@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "A direct register manipulation UART library over channel 0 for the ATmega 2560 microcontroller.",
     "authors": [
-        { "name": "Dieufainson Jean" }
+        { "name": "Dieufainson Jean" },
+        { "name": "Gabriel Jordaan" }
     ]
 }
