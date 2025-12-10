@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1765355696.59058 "/Users/gabrieljordaan/Desktop/Coding/Magnum opi/Wetris/Wetris-CPE-301-Final-Project/latex/REPORT.tex" "REPORT.pdf" "REPORT" 1765355697.01743 0
-  "/Users/gabrieljordaan/Desktop/Coding/Magnum opi/Wetris/Wetris-CPE-301-Final-Project/latex/REPORT.tex" 1765355695.56422 23084 2f95ec06398163610c569082704980fa ""
+["pdflatex"] 1765356021.9416 "/Users/gabrieljordaan/Desktop/Coding/Magnum opi/Wetris/Wetris-CPE-301-Final-Project/latex/REPORT.tex" "REPORT.pdf" "REPORT" 1765356022.37343 0
+  "/Users/gabrieljordaan/Desktop/Coding/Magnum opi/Wetris/Wetris-CPE-301-Final-Project/latex/REPORT.tex" 1765356021.28627 23194 ec122ac6db10548ddecf672513b8c905 ""
   "/Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk" 1765347208.80957 13556 96df97746222aa75a8b21cbd245e9d7d ""
   "/Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1764660136.6103 12644 fc174f309754f404f3fc20d7e852e751 ""
   "/Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1765334176.32742 14040 6a5a9f925cc2f00ff1767644246ad3f6 ""
@@ -89,10 +89,10 @@
   "/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1763609305 79187 04b17f8738f833a5a5f7867124477b59 ""
   "/usr/local/texlive/2025basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1741448339 2663854 a6f6b8c904d47faabe5d94cfdac61310 ""
   "/usr/local/texlive/2025basic/texmf.cnf" 1741448314 628 81d1ada0f601fb1ffa62f1323192d946 ""
-  "REPORT.aux" 1765355696.99004 10053 0677444e6ed7497f22ea357da598f17d "pdflatex"
-  "REPORT.out" 1765355696.99066 4495 ac668cba837dd3b979186a14221bb16b "pdflatex"
-  "REPORT.tex" 1765355695.56422 23084 2f95ec06398163610c569082704980fa ""
-  "REPORT.toc" 1765355696.99081 2659 a810e2434cebc189061314116d6a4b51 "pdflatex"
+  "REPORT.aux" 1765356022.34425 10043 4209c35f50e3d97747d2c872f76ed7d6 "pdflatex"
+  "REPORT.out" 1765356022.34514 4485 d37e4816887bcd846285e8ebc2e28c95 "pdflatex"
+  "REPORT.tex" 1765356021.28627 23194 ec122ac6db10548ddecf672513b8c905 ""
+  "REPORT.toc" 1765356022.34532 2649 36ccc0857cfc183b49af7bd54a642f2b "pdflatex"
   "photos/Block Clear.jpeg" 1765352982.94781 1140453 1ba98e21ed03c59980e44c3ef8900e1e ""
   "photos/Circuit.jpeg" 1765352982.18443 1616823 410ddc112dbe3d8062ee9d65f535d112 ""
   "photos/Gabriel_Jordaan.jpg" 1765352981.45342 167464 baa1ad0ef58d7073e3b9e4b8444019ab ""

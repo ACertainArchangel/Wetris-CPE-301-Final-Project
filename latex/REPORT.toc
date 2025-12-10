@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {7.1}Repository}{21}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Documentation}{21}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Demo Videos}{21}{subsection.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.1}3D Printing Files}{21}{subsubsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.4}3D Printing Files}{21}{subsection.7.4}%
 \contentsline {section}{\numberline {8}Our Team}{21}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Gabriel Jordaan}{21}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Team Member 2}{22}{subsection.8.2}%
