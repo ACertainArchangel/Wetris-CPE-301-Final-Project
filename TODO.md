@@ -12,8 +12,8 @@
 
 #### Gabe:
 * Add Schematic to Report
-* Team info at top of main.cpp
 * Final test when Jorge fixes buttons.
+* Double check report and that we used all concepts.
 
 
 #### Son:
