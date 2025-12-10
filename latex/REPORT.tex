@@ -186,9 +186,79 @@ These images showcase the physical implementation of the Wetris system, includin
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Circuit Photo Placeholder\vspace{2in}}}
-\caption{Physical circuit implementation of Wetris system}
+\includegraphics[width=0.8\textwidth]{photos/Circuit.jpeg}
+\caption{Physical circuit implementation of Wetris system shown from above}
 \label{fig:circuit}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/Normal Gameplay.jpeg}
+\caption{Normal gameplay showing Tetris blocks falling and stacking}
+\label{fig:gameplay}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/Moving and Rotating.jpeg}
+\caption{Player moving and rotating blocks during gameplay}
+\label{fig:moving}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/Block Clear.jpeg}
+\caption{Clearing the screen before block clearing animation when a row is completed}
+\label{fig:clear}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/point score.jpeg}
+\caption{Player scoring a point by completing a row}
+\label{fig:score}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/win.jpeg}
+\caption{Victory screen displayed when safety threshold is reached after game over}
+\label{fig:win}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/loss.jpeg}
+\caption{Game over screen displayed when player loses}
+\label{fig:loss}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/You Needed A Wash.jpeg}
+\caption{Game over screen with debug statements shown on serial monitor}
+\label{fig:wash}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/Relay On.jpeg}
+\caption{Relay module in activated state controlling water gun actuator}
+\label{fig:relay-on}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/relay off.jpeg}
+\caption{Relay module in deactivated state}
+\label{fig:relay-off}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{photos/intheface.jpeg}
+\caption{Player getting wet from the water gun actuator}
+\label{fig:intheface}
 \end{figure}
 
 \section{Schematic Diagram}
@@ -199,8 +269,36 @@ There is a high level diagram that shows how the peripherals are connected, and 
 \begin{figure}[H]
 \centering
 \fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
-\caption{Electrical schematic of Wetris system}
-\label{fig:schematic}
+\caption{High level electrical schematic of Wetris system}
+\label{fig:schematic-high-level}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
+\caption{Electrical schematic of water gun module}
+\label{fig:schematic-water-gun}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
+\caption{Electrical schematic of music module}
+\label{fig:schematic-music}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
+\caption{Electrical schematic of LCD and button module}
+\label{fig:schematic-lcd-buttons}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
+\caption{Electrical schematic of potentiometer module}
+\label{fig:schematic-potentiometer}
 \end{figure}
 
 \section{Links}
@@ -233,6 +331,8 @@ Link to demo videos: \\
     \textbf{Major}: Electrical Engineering
     
     \textbf{Email}: gvanrijnjordaan@unr.edu
+
+    \textbf{GitHub}: \url{https://github.com/ACertainArchangel}
     
     \vspace{0.3cm}
     \textbf{Role \& Contributions}:
@@ -352,7 +452,7 @@ We would also like to acknowledge the open-source libraries that made this proje
     \item Adafruit GFX and SPITFT libraries - For providing the foundational graphics and display functionality.
 \end{itemize}
 
-Thanks to Pastor David Minott for the idea of using a door lock actuator instead of a solenoid.
+Thanks to Pastor David Minott for the idea of using a door lock actuator instead of a solenoid.\\
 
 Thanks to Nikolai Nekrasov for writing the original Korobeiniki song in 1861. (He's dead and can't sue us for copyright infringement right?)
 

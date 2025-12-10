@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 23:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 23:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -404,33 +404,118 @@ Overfull \hbox (18.33234pt too wide) in paragraph at lines 106--109
 [7]
 
 [8]
+<photos/Circuit.jpeg, id=220, 4047.12pt x 3035.34pt>
+File: photos/Circuit.jpeg Graphic file (type jpg)
+<use photos/Circuit.jpeg>
+Package pdftex.def Info: photos/Circuit.jpeg  used on input line 189.
+(pdftex.def)             Requested size: 362.37569pt x 271.77934pt.
+<photos/Normal Gameplay.jpeg, id=221, 3035.34pt x 4047.12pt>
+File: photos/Normal Gameplay.jpeg Graphic file (type jpg)
+<use photos/Normal Gameplay.jpeg>
+Package pdftex.def Info: photos/Normal Gameplay.jpeg  used on input line 196.
+(pdftex.def)             Requested size: 317.07614pt x 422.76788pt.
+
 
 [9
 
-]
-Overfull \hbox (22.50734pt too wide) in paragraph at lines 216--218
+ <./photos/Circuit.jpeg>]
+<photos/Moving and Rotating.jpeg, id=227, 3035.34pt x 4047.12pt>
+File: photos/Moving and Rotating.jpeg Graphic file (type jpg)
+<use photos/Moving and Rotating.jpeg>
+Package pdftex.def Info: photos/Moving and Rotating.jpeg  used on input line 203.
+(pdftex.def)             Requested size: 317.07614pt x 422.76788pt.
+
+
+[10 <./photos/Normal Gameplay.jpeg>]
+<photos/Block Clear.jpeg, id=233, 4047.12pt x 3035.34pt>
+File: photos/Block Clear.jpeg Graphic file (type jpg)
+<use photos/Block Clear.jpeg>
+Package pdftex.def Info: photos/Block Clear.jpeg  used on input line 210.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+
+
+[11 <./photos/Moving and Rotating.jpeg>]
+<photos/point score.jpeg, id=239, 4047.12pt x 3035.34pt>
+File: photos/point score.jpeg Graphic file (type jpg)
+<use photos/point score.jpeg>
+Package pdftex.def Info: photos/point score.jpeg  used on input line 217.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+<photos/win.jpeg, id=240, 4047.12pt x 3035.34pt>
+File: photos/win.jpeg Graphic file (type jpg)
+<use photos/win.jpeg>
+Package pdftex.def Info: photos/win.jpeg  used on input line 224.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+
+
+[12 <./photos/Block Clear.jpeg> <./photos/point score.jpeg>]
+<photos/loss.jpeg, id=247, 4047.12pt x 3035.34pt>
+File: photos/loss.jpeg Graphic file (type jpg)
+<use photos/loss.jpeg>
+Package pdftex.def Info: photos/loss.jpeg  used on input line 231.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+<photos/You Needed A Wash.jpeg, id=248, 5733.42pt x 4300.065pt>
+File: photos/You Needed A Wash.jpeg Graphic file (type jpg)
+<use photos/You Needed A Wash.jpeg>
+Package pdftex.def Info: photos/You Needed A Wash.jpeg  used on input line 238.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+
+
+[13 <./photos/win.jpeg> <./photos/loss.jpeg>]
+<photos/Relay On.jpeg, id=256, 4047.12pt x 3035.34pt>
+File: photos/Relay On.jpeg Graphic file (type jpg)
+<use photos/Relay On.jpeg>
+Package pdftex.def Info: photos/Relay On.jpeg  used on input line 245.
+(pdftex.def)             Requested size: 317.07614pt x 237.78377pt.
+<photos/relay off.jpeg, id=257, 3035.34pt x 4047.12pt>
+File: photos/relay off.jpeg Graphic file (type jpg)
+<use photos/relay off.jpeg>
+Package pdftex.def Info: photos/relay off.jpeg  used on input line 252.
+(pdftex.def)             Requested size: 317.07614pt x 422.76788pt.
+
+
+[14 <./photos/You Needed A Wash.jpeg> <./photos/Relay On.jpeg>]
+<photos/intheface.jpeg, id=264, 742.775pt x 732.7375pt>
+File: photos/intheface.jpeg Graphic file (type jpg)
+<use photos/intheface.jpeg>
+Package pdftex.def Info: photos/intheface.jpeg  used on input line 259.
+(pdftex.def)             Requested size: 317.07614pt x 312.79013pt.
+
+
+[15 <./photos/relay off.jpeg>]
+
+[16 <./photos/intheface.jpeg>]
+
+[17]
+
+[18]
+Overfull \hbox (22.50734pt too wide) in paragraph at lines 314--316
 []$\OT1/cmtt/m/n/12 https : / / drive . google . com / drive / folders / 1Q4Bg4BSVfFWwpvJh6P310yMYkDlfBsM4 ? usp =
  []
 
-<photos/Gabriel_Jordaan.jpg, id=227, 1210.5225pt x 1608.0075pt>
+<photos/Gabriel_Jordaan.jpg, id=289, 1210.5225pt x 1608.0075pt>
 File: photos/Gabriel_Jordaan.jpg Graphic file (type jpg)
 <use photos/Gabriel_Jordaan.jpg>
-Package pdftex.def Info: photos/Gabriel_Jordaan.jpg  used on input line 225.
+Package pdftex.def Info: photos/Gabriel_Jordaan.jpg  used on input line 323.
 (pdftex.def)             Requested size: 85.35826pt x 113.38171pt.
 
 
-[10]
+[19]
 
-[11 <./photos/Gabriel_Jordaan.jpg>]
+[20 <./photos/Gabriel_Jordaan.jpg>]
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 346--349
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 446--449
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
 
  []
 
 
 
-[13
+[22
 
 ] (./REPORT.aux)
  ***********
@@ -441,18 +526,18 @@ Package rerunfilecheck Info: File `REPORT.out' has not changed.
 (rerunfilecheck)             Checksum: F319C1942F24B3F7264AD838985FB63D;4229.
  ) 
 Here is how much of TeX's memory you used:
- 12281 strings out of 474662
- 239031 string characters out of 5751110
- 621068 words of memory out of 5000000
- 35160 multiletter control sequences out of 15000+600000
+ 12395 strings out of 474662
+ 241690 string characters out of 5751110
+ 622141 words of memory out of 5000000
+ 35251 multiletter control sequences out of 15000+600000
  567445 words of font info for 64 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  75i,10n,79p,1024b,1039s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk> </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on REPORT.pdf (13 pages, 2071677 bytes).
+Output written on REPORT.pdf (22 pages, 13009352 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
- 254 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 387 PDF objects out of 1000 (max. 8388607)
+ 324 compressed objects within 4 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 

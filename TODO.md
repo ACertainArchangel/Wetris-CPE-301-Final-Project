@@ -17,6 +17,7 @@
 * Final report framework
 * Schematic
 * About self on README.md and REPORT.tex
+* Team info at top of main.cpp
 
 
 #### Son:
