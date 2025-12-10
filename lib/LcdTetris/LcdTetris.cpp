@@ -9,7 +9,6 @@
 
 #define SAFETY_THRESHOLD 1 // YOU MUST UPDATE THIS IF YOU CHANGE IT IN main.cpp
 
-/* Check 1. LCcdTetris
  namespace LcdTetris {
 
     // GPIO 
@@ -73,11 +72,6 @@
 
         return ADC;   // 10-bit result (0–1023)
     }
-
-*/
-
-
-namespace LcdTetris{
 
     // Forward declarations
     void initBoard();
@@ -199,7 +193,7 @@ namespace LcdTetris{
     int width = mylcd.Get_Display_Width();
     int height = mylcd.Get_Display_Height();
 
-/* Check 2 - Setup
+
 void setup() {
     if (!UARTLib::isInitialized()) {
         UARTLib::setup(9600);
@@ -218,22 +212,7 @@ void setup() {
     mylcd.Set_Rotation(2); // Upside down
     clearScreen();
 }
-*/
 
-    void setup() {
-        if (!UARTLib::isInitialized()) {
-            UARTLib::setup(9600);
-        }
-        pinMode(button1Pin, INPUT_PULLUP);
-        pinMode(button2Pin, INPUT_PULLUP);
-        pinMode(button3Pin, INPUT_PULLUP);
-        randomSeed(analogRead(1)); // seed random with noise from unconnected analogue pin
-        initBoard();
-        initPiece();
-        mylcd.Init_LCD();
-        mylcd.Set_Rotation(2); // Upside down
-        clearScreen();
-    }
 
     bool update(uint16_t stress_level) {
         // Adjust tick rate based on stress level (higher stress = faster game)
@@ -476,39 +455,13 @@ bool pieceFits() {
   }
   return true;
 
-/*Check 3 - processInputs
+}
+
 void processInputs() {
   button1Val = readButton1();
   button2Val = readButton2();
   button3Val = readButton3();
 
-  // if (button1Val == LOW && button2Val == LOW && button1LastVal == HIGH && button2LastVal == HIGH) {
-  //   dropPiece();
-  // }
-  if (button1Val == LOW && button1LastVal == HIGH) {
-    moveLeft();
-    UARTLib::writeString("B1 pressed (left)\n");
-  }
-  if (button2Val == LOW && button2LastVal == HIGH) {
-    moveRight();
-    UARTLib::writeString("B2 pressed (right)\n");
-  }
-  if (button3Val == LOW && button3LastVal == HIGH) {
-    rotatePieceCW();
-    UARTLib::writeString("B3 pressed\n");
-  }
-  button1LastVal = button1Val;
-  button2LastVal = button2Val;
-  button3LastVal = button3Val;
-}
-
-*/
-    
-}
-void processInputs() {
-  button1Val = digitalRead(button1Pin);
-  button2Val = digitalRead(button2Pin);
-  button3Val = digitalRead(button3Pin);
   // if (button1Val == LOW && button2Val == LOW && button1LastVal == HIGH && button2LastVal == HIGH) {
   //   dropPiece();
   // }
@@ -806,23 +759,10 @@ void gameOver() {
   }
 
 
-/*
-Check 4 - gameover
-
-mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
-  while (button1Val == LOW) {
-    // just sits here until restart
-    button1Val = readButton1();
-  }
-}
-
-*/
-
-    
   mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
   while (button1Val == LOW) {
     // just sits here until restart
-    button1Val = digitalRead(button1Pin);
+    button1Val = readButton1();
   }
 }
 
