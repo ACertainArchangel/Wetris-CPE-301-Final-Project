@@ -12,6 +12,7 @@
 
 #### Gabe:
 * Add Schematic to Report
+* Add technical drawings to report
 * Final test when Jorge fixes buttons.
 * Double check report and that we used all concepts.
 
