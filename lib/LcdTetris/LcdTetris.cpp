@@ -173,7 +173,7 @@
 
     //paramters define
     #define MODEL ST7796S
-    #define CS   10    
+    #define CS   7 
     #define CD   9
     #define RST  8
     #define LED  2   //if you don't need to control the LED pin,you should set it to -1 and set it to 3.3V
@@ -758,12 +758,14 @@ void gameOver() {
     }
   }
 
-
+/*
+This part is unused since
   mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
   while (button1Val == LOW) {
     // just sits here until restart
     button1Val = readButton1();
   }
+*/
 }
 
 // To only be called when placePiece() is called
