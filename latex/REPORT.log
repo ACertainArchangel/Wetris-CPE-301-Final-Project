@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 21:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 DEC 2025 21:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -367,7 +367,7 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `REPORT.out' has not changed.
-(rerunfilecheck)             Checksum: F6DB09BCEF2E9FDB2AAD912E67E85B73;2756.
+(rerunfilecheck)             Checksum: FDC60D242F5B19102AF007FB919883EB;2759.
  ) 
 Here is how much of TeX's memory you used:
  12239 strings out of 474662
@@ -378,7 +378,7 @@ Here is how much of TeX's memory you used:
  319 hyphenation exceptions out of 8191
  75i,8n,79p,993b,1039s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/gabrieljordaan/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on REPORT.pdf (9 pages, 100216 bytes).
+Output written on REPORT.pdf (9 pages, 100176 bytes).
 PDF statistics:
  215 PDF objects out of 1000 (max. 8388607)
  187 compressed objects within 2 object streams
