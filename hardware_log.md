@@ -7,12 +7,10 @@ This is a place for us to put what pins and other hardware we want so we aren't 
 |OC1A(pin11)+ Timer1|Gabe            |PWM signal for music     |
 |OC3A(pin5) + Timer3|Gabe            |PWM signal for music     |
 |OC4A(pin6) + Timer4|Gabe            |PWM signal for music     |
-
 |Button 1(pin13)    |Roman+Jorge+Gabe|Left Movement            |
 |Button 2(pin12)    |Roman+Jorge+Gabe|Right Movement           |
 |Button 3(pin10)    |Roman+Jorge+Gabe|Rotation Movement        |
-
-|LCD(pins 7-9)     |Roman            |LCD connections          |
+|LCD(pins 7-9)      |Roman           |LCD connections          |
 |LCD(Dig. Pins50-52)|Roman           |LCD connections          |
 |LCD LED(pin2)      |Roman           |No idea                  |
 |FWD Pin (22)       |Son+Gabe        |Drive actuator           |

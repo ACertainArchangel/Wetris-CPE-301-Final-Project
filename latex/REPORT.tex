@@ -1,0 +1,282 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{geometry}
+\usepackage{siunitx}
+\geometry{margin=1in}
+
+\title{Wetris: CPE 301 Final Project}
+\author{Team Wetris (Team 42)}
+\date{December 12, 2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Project Description}
+Wetris is a suspenseful and slightly nerve-racking spin-off of Tetris, the classic block-stacking game. The player races to clear enough lines to reach the target score before their stack reaches the top, and if they fail, they get splashed with water! To make it even better, the spring powered water gun is very loud and is a garenteed jump scare even if you know it's coming. It makes for a great party game, and would go well as an attraction in an arcade.
+
+\section{Component Details}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Component}          & \textbf{Qty}            & \textbf{Cost}   & \textbf{Purpose}                   \\ \hline
+Arduino Mega 2560          & 1 & \$45 & Main MCU for game logic and control \\ \hline
+LCD Display (ST7796S) & 1 & \$30 & Display game visuals \\ \hline
+Control Buttons & 4 & \$5 & User input for game control \\ \hline
+Water Gun Actuator & 1 & \$20 & Actuate water gun mechanism \\ \hline
+Potentiometer & 1 & \$2 & Adjust game settings \\ \hline
+Speaker/Audio Output & 1 & \$3 & Provide audio feedback \\ \hline
+\end{tabular}
+\caption{Component details of Wetris system}
+\label{tab:components}
+\end{table}
+
+\section{System Overview}
+
+For this project we designed a series of peripherals to interface with the microcontroller in the Arduino Mega 2560 development board, and connected them in a 3d printed casing. The design is highly modular, with each peripheral being controlled by a library, and being handled from a high level main loop. See code and schematic for most in depth explaination. The peripherals are:
+\begin{itemize}
+\item The Tetris module, consisting of just an LCD, three buttons, and the software to run tetris game logic
+\item The music module, with three buzzers playing the tetris theme song (Korobeiniki)
+\item The water gun module, which consists of a syringe, which is pushed by a spring powered plunger let back by a door lock actuator controlled by a relay module, which is in turn controlled by opto-couplers.
+\item The potentiometer module, which is used to adjust the speed of the music module and the Tetris module.
+\end{itemize}
+
+
+\subsection{Hardware Architecture}
+The following table outlines the microcontroller resources allocated to each component of the Wetris system, and details the connections used:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Reserved Component} & \textbf{Name of User} & \textbf{Purpose} \\ \hline
+OC1A(pin11)+ Timer1 & Gabe & PWM signal for music \\ \hline
+OC3A(pin5) + Timer3 & Gabe & PWM signal for music \\ \hline
+OC4A(pin6) + Timer4 & Gabe & PWM signal for music \\ \hline
+Button 1(pin13) & Roman+Jorge+Gabe & Left Movement \\ \hline
+Button 2(pin12) & Roman+Jorge+Gabe & Right Movement \\ \hline
+Button 3(pin10) & Roman+Jorge+Gabe & Rotation Movement \\ \hline
+LCD(pins 7-9) & Roman & LCD connections \\ \hline
+LCD(Dig. Pins50-52) & Roman & LCD connections \\ \hline
+LCD LED(pin2) & Roman & Backlight control \\ \hline
+FWD Pin (22) & Son+Gabe & Drive actuator forward \\ \hline
+REV Pin (23) & Son+Gabe & Drive actuator reverse \\ \hline
+\end{tabular}
+\caption{Hardware resource allocation for Wetris system}
+\label{tab:hardware}
+\end{table}
+
+\subsubsection{Tetris Module}
+In order to reach the back of the casing where the MCU is mounted from the LCD and buttons in the front of the casing, we used 16 AWG wire to connect the buttons and dupont wires linked end to end to connect the LCD. The LCD pin connections in detail are as follows:
+\begin{itemize}
+    \item Pin 2  $\rightarrow$ LED pin on the LCD
+    \item Pin 4  $\rightarrow$ Rotate Piece Button
+    \item Pin 8  $\rightarrow$ RESET pin on LCD
+    \item Pin 9  $\rightarrow$ CD pin on LCD
+    \item Pin 10 $\rightarrow$ CS pin on LCD
+    \item Pin 12 $\rightarrow$ Right Button
+    \item Pin 13 $\rightarrow$ Left Button
+    \item Pin 50 $\rightarrow$ SDO
+    \item Pin 51 $\rightarrow$ SDI
+    \item Pin 52 $\rightarrow$ SCK
+\end{itemize}
+
+\subsubsection{Music Module}
+The music module uses output compare pins OC1A (pin 11), OC3A (pin 5), and OC4A (pin 6) to output PWM signals to three separate piezo buzzers. Each buzzer is connected in series with a 100 ohm resistor to limit current and a \qty{10}{\micro\farad} capacitor to smooth the signal. The code directly loads frequency and duration values into memory and iterates through them to play the song. This method is highly memory intensive, but allows for accurate timing and frequency control. The music was converted from midi format to c style arrays using a custom python script found in the repository.
+
+\subsubsection{Water Gun Module}
+In order to isolate the high current 12V power supply used to drive the water gun actuator from the 5V logic of the Arduino, we used a relay module controlled by opto-couplers. The relay module is powered by the 12V supply, and the opto-couplers are powered by the 5V supply from the Arduino. The opto-couplers are connected to digital pins 22 and 23 on the Arduino, which control the forward and reverse movement of the actuator respectively. When the game is over and the safety threshold has not been reached, the Arduino activates the relay in reverse to trigger the water gun mechanism. The foreward function is not used in normal operation, but is included for completeness.
+
+\subsubsection{Potentiometer Module}
+The potentiometer is our most simple peripheral, being connected to the 5V and GND pins on the Arduino, with the wiper connected to analog pin A0. The potentiometer is used to adjust the speed of the game and music modules, allowing the player to customize their experience. Also allowing their friends to set it to an impossible speed in the middle of a game for extra fun.
+
+\subsection{Software Architecture}
+The software is structured in a modular fashion, with each peripheral being handled by its own library. The main loop coordinates the interactions between the different modules, ensuring smooth gameplay and timely responses to user inputs. All modules had to be engineered to be non-blocking and work together. This presented a difficult engineering challenge that had to be overcome with many optimisations and plan-B methodologies. For example, the LCD tetris module had to render only when the game state changed, otherwise the music module would stutter as the updates took too much time. Clearing the screen with the LCD library took too long, so we had to implement our own function to only update the parts of the screen that changed, and now we only use the clearing function when absolutely necessary, such as at the start of the game or when a row is cleared.
+
+\subsection{Power}
+The Wetris system needs two power sources to operate correctly. The first is power to the Arduino, which is supplied through the barrel jack port via a 9V battery (the 9V is internally regulated to 5V by the Arduino). The second power source is a 12V power supply which powers the water gun actuator via a relay module. The relay module is controlled by the Arduino through opto-couplers to isolate the two power sources.
+
+\clearpage
+
+\section{Images}
+
+These images showcase the physical implementation of the Wetris system, including the circuit and various stages of gameplay.
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Circuit Photo Placeholder\vspace{2in}}}
+\caption{Physical circuit implementation of Wetris system}
+\label{fig:circuit}
+\end{figure}
+
+\section{Schematic Diagram}
+
+Below is a schematic diagram illustrating the electrical connections and components used in the Wetris system.
+There is a high level diagram that shows how the peripherals are connected, and a more detailed schematic for each peripheral.
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2in}Schematic Diagram Placeholder\vspace{2in}}}
+\caption{Electrical schematic of Wetris system}
+\label{fig:schematic}
+\end{figure}
+
+\section{Links}
+
+\subsection{Repository}
+GitHub Repository: \\
+\url{https://github.com/ACertainArchangel/Wetris-CPE-301-Final-Project}
+
+\subsection{Documentation}
+Additional documentation and resources can be found in the project repository.
+
+\subsection{Demo Videos}
+Link to demo videos: \\
+\url{https://drive.google.com/drive/folders/1Q4Bg4BSVfFWwpvJh6P310yMYkDlfBsM4?usp=sharing}
+
+\section{Our Team}
+
+\subsection{Gabriel Jordaan}
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \fbox{\parbox{3cm}{\centering\vspace{3cm}Photo\\Here}}
+    
+    \vspace{0.2cm}
+    \textit{[Member 1 Name]}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+    
+    \textbf{Major}: Electrical Engineering
+    
+    \textbf{Email}: gvanrijnjordaan@unr.edu
+    
+    \vspace{0.3cm}
+    \textbf{Role \& Contributions}:
+    
+    Project manager, hardware developer, music module, python utilities, documentation, and final report.
+    
+    \vspace{0.3cm}
+    \textbf{About Me}:
+    
+    Imma put a cool bio here later. And its gonna be lit. Fo sho. Bro. Yo yo yo. 
+\end{minipage}
+
+\vspace{0.5cm}
+
+\subsection{Roman Rosburg}
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \fbox{\parbox{3cm}{\centering\vspace{3cm}Photo\\Here}}
+    
+    \vspace{0.2cm}
+    \textit{[Member 2 Name]}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+    \textbf{Name}: [Insert Name]
+    
+    \textbf{Major}: Computer Engineering
+    
+    \textbf{Email}: [email@university.edu]
+    
+    \textbf{LinkedIn}: [linkedin.com/in/profile]
+    
+    \vspace{0.3cm}
+    \textbf{Role \& Contributions}:
+    
+    [Describe your specific contributions to the project - hardware design, software modules, system integration, testing, etc.]
+    
+    \vspace{0.3cm}
+    \textbf{About Me}:
+    
+    [Brief professional bio highlighting your skills, interests, career goals, relevant coursework, internships, projects, and what makes you stand out to potential employers.]
+\end{minipage}
+
+\vspace{0.5cm}
+
+\subsection{Team Member 3}
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \fbox{\parbox{3cm}{\centering\vspace{3cm}Photo\\Here}}
+    
+    \vspace{0.2cm}
+    \textit{[Member 3 Name]}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+    \textbf{Name}: [Insert Name]
+    
+    \textbf{Major}: Computer Engineering
+    
+    \textbf{Email}: [email@university.edu]
+    
+    \textbf{LinkedIn}: [linkedin.com/in/profile]
+    
+    \vspace{0.3cm}
+    \textbf{Role \& Contributions}:
+    
+    [Describe your specific contributions to the project - hardware design, software modules, system integration, testing, etc.]
+    
+    \vspace{0.3cm}
+    \textbf{About Me}:
+    
+    [Brief professional bio highlighting your skills, interests, career goals, relevant coursework, internships, projects, and what makes you stand out to potential employers.]
+\end{minipage}
+
+\vspace{0.5cm}
+
+\subsection{Team Member 4}
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \fbox{\parbox{3cm}{\centering\vspace{3cm}Photo\\Here}}
+    
+    \vspace{0.2cm}
+    \textit{[Member 4 Name]}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+    \textbf{Name}: [Insert Name]
+    
+    \textbf{Major}: Computer Engineering
+    
+    \textbf{Email}: [email@university.edu]
+    
+    \textbf{LinkedIn}: [linkedin.com/in/profile]
+    
+    \vspace{0.3cm}
+    \textbf{Role \& Contributions}:
+    
+    [Describe your specific contributions to the project - hardware design, software modules, system integration, testing, etc.]
+    
+    \vspace{0.3cm}
+    \textbf{About Me}:
+    
+    [Brief professional bio highlighting your skills, interests, career goals, relevant coursework, internships, projects, and what makes you stand out to potential employers.]
+\end{minipage}
+
+\vspace{0.5cm}
+
+\clearpage
+
+\subsection{Acknowledgments}
+
+Thanks to our CPE 301 professor, Dr. Bashira Anima, for a great series of classes in fall 2025 and for being a good sport and letting us soak her with water!
+\\\\
+We would also like to acknowledge the open-source libraries that made this project possible:
+
+\begin{itemize}
+    \item LCDWIKI\_SPI and LCDWIKI\_GUI libraries - Created by the lcdwiki team (\url{https://github.com/lcdwiki/LCDWIKI_gui}), based on Adafruit GFX lib and Adafruit SPITFT lib, with init code from Rossum. Released under MIT license.
+    \item Adafruit GFX and SPITFT libraries - For providing the foundational graphics and display functionality.
+\end{itemize}
+
+Thanks to Nikolai Nekrasov for writing the original Korobeiniki song in 1861. (He's dead and can't sue us for copyright infringement right?)
+
+\end{document}
