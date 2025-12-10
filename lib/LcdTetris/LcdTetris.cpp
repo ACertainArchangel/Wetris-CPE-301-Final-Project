@@ -9,6 +9,74 @@
 
 #define SAFETY_THRESHOLD 1 // YOU MUST UPDATE THIS IF YOU CHANGE IT IN main.cpp
 
+/* Check 1. LCcdTetris
+ namespace LcdTetris {
+
+    // GPIO 
+    // Button pins:
+    //  D13 → PB7
+    //  D12 → PB6
+    //  D4  → PG5
+    constexpr uint8_t BTN1_BIT = PB7;  // button1Pin = 13
+    constexpr uint8_t BTN2_BIT = PB6;  // button2Pin = 12
+    constexpr uint8_t BTN3_BIT = PG5;  // button3Pin = 4
+
+    inline void buttonsInit() {
+        // Configure as INPUT_PULLUP:
+        // DDRx bit = 0 (input), PORTx bit = 1 (pull-up enabled)
+
+        // D13, D12 on PORTB
+        DDRB  &= ~(_BV(BTN1_BIT) | _BV(BTN2_BIT));   // inputs
+        PORTB |=  (_BV(BTN1_BIT) | _BV(BTN2_BIT));   // pull-ups on
+
+        // D4 on PORTG
+        DDRG  &= ~_BV(BTN3_BIT);                     // input
+        PORTG |=  _BV(BTN3_BIT);                     // pull-up on
+    }
+
+    inline int readButton1() {
+        // Return LOW/HIGH like digitalRead
+        return (PINB & _BV(BTN1_BIT)) ? HIGH : LOW;
+    }
+
+    inline int readButton2() {
+        return (PINB & _BV(BTN2_BIT)) ? HIGH : LOW;
+    }
+
+    inline int readButton3() {
+        return (PING & _BV(BTN3_BIT)) ? HIGH : LOW;
+    }
+
+    // --- ADC helpers (for analog noise on A1 / ADC1) ---
+
+    inline void adcInit() {
+        // Reference = AVcc (5V), right-adjust result
+        ADMUX  = _BV(REFS0);  // REFS1:0 = 01, ADLAR = 0, MUX[3:0] = 0000
+
+        // Enable ADC, prescaler = 128 → 16 MHz / 128 = 125 kHz
+        ADCSRA = _BV(ADEN) | _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0);
+
+        // Optional: disable digital input on ADC1 (A1) to reduce noise
+        DIDR0 |= _BV(ADC1D);
+    }
+
+    inline uint16_t adcRead(uint8_t channel) {
+        // Support channels ADC0–ADC7 (A0–A7)
+        channel &= 0x07;
+        ADMUX = (ADMUX & 0xF8) | channel;  // keep REFS/ADLAR, set MUX[2:0]
+
+        // Start conversion
+        ADCSRA |= _BV(ADSC);
+
+        // Wait until conversion completes
+        while (ADCSRA & _BV(ADSC)) { }
+
+        return ADC;   // 10-bit result (0–1023)
+    }
+
+*/
+
+
 namespace LcdTetris{
 
     // Forward declarations
@@ -130,6 +198,27 @@ namespace LcdTetris{
     // render area of board
     int width = mylcd.Get_Display_Width();
     int height = mylcd.Get_Display_Height();
+
+/* Check 2 - Setup
+void setup() {
+    if (!UARTLib::isInitialized()) {
+        UARTLib::setup(9600);
+    }
+
+
+    buttonsInit();
+
+    // Initialize ADC and seed RNG from A1 (ADC1)
+    adcInit();
+    randomSeed(adcRead(1));   // A1 / ADC1
+
+    initBoard();
+    initPiece();
+    mylcd.Init_LCD();
+    mylcd.Set_Rotation(2); // Upside down
+    clearScreen();
+}
+*/
 
     void setup() {
         if (!UARTLib::isInitialized()) {
@@ -386,6 +475,35 @@ bool pieceFits() {
     }
   }
   return true;
+
+/*Check 3 - processInputs
+void processInputs() {
+  button1Val = readButton1();
+  button2Val = readButton2();
+  button3Val = readButton3();
+
+  // if (button1Val == LOW && button2Val == LOW && button1LastVal == HIGH && button2LastVal == HIGH) {
+  //   dropPiece();
+  // }
+  if (button1Val == LOW && button1LastVal == HIGH) {
+    moveLeft();
+    UARTLib::writeString("B1 pressed (left)\n");
+  }
+  if (button2Val == LOW && button2LastVal == HIGH) {
+    moveRight();
+    UARTLib::writeString("B2 pressed (right)\n");
+  }
+  if (button3Val == LOW && button3LastVal == HIGH) {
+    rotatePieceCW();
+    UARTLib::writeString("B3 pressed\n");
+  }
+  button1LastVal = button1Val;
+  button2LastVal = button2Val;
+  button3LastVal = button3Val;
+}
+
+*/
+    
 }
 void processInputs() {
   button1Val = digitalRead(button1Pin);
@@ -686,6 +804,21 @@ void gameOver() {
         break;
     }
   }
+
+
+/*
+Check 4 - gameover
+
+mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
+  while (button1Val == LOW) {
+    // just sits here until restart
+    button1Val = readButton1();
+  }
+}
+
+*/
+
+    
   mylcd.Print_String("Press left to restart", (width / 2) - 150, (height / 2) + 50);
   while (button1Val == LOW) {
     // just sits here until restart
