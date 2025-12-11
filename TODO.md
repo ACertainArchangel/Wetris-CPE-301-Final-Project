@@ -2,26 +2,21 @@
 
 ## Roman
 
-* About self on README.md and REPORT.tex
-* Photo for latex
+* Done
 
 ## Jorge
 
-* Send your videos to me so I can put them in the google drive folder
-* About self on README.md and REPORT.tex
-* Photo for latex
+* Done
 
 ## Gabe
 
-* Add new vids to folder
-* Add Schematics to Report
-* Double check report
+* Done
 
 ## Son
 
-* Photo for latex
+* Done
 
-## Bugs
+## Bugs (which are non-critical and which we will let sit for now)
 
 * Sand tetris
 * Crashes when serial monitor is opened
